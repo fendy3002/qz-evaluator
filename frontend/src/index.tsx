@@ -31,8 +31,8 @@ const blockly = (elem, option?: any) => {
     
     let logic = `
         <block type="compare"></block>
-        
-        <block type="and"></block>`;
+        <block type="and"></block>
+        <block type="or"></block>`;
     
     // let logic = `
     //     <block type="compare"></block>

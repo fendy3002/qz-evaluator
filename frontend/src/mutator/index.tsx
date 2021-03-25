@@ -1,8 +1,8 @@
-import * as andMutator from './and';
+import * as and_or from './and_or';
 
 export {
-    andMutator
+    and_or
 };
 export const register = (registerMutator) => {
-    andMutator.register(registerMutator);
+    and_or.register(registerMutator);
 };

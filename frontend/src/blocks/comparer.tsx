@@ -66,7 +66,7 @@ let and = {
                 createMinusField(1), 'MINUS1');
 
         // this.setMutator(new Blockly.Mutator(['my_block_A', 'my_block_B']));
-        this.jsonInit({ "mutator": "and_mutator" });
+        this.jsonInit({ "mutator": "and_or_mutator" });
     },
 };
 let or = {
@@ -74,12 +74,30 @@ let or = {
         this.setColour(210);
         this.setOutput(true, ["boolean"]);
 
-        this.appendStatementInput('EVAL')
-            .appendField('and');
-    }
+        // this.appendStatementInput('EVAL')
+        //     .appendField('and');
+        this.appendDummyInput()
+            .appendField(createPlusField(), "PLUS")
+            .appendField("or");
+
+        this.appendValueInput('clause0')
+            .setCheck('boolean')
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(
+                createMinusField(0), 'MINUS0');
+        this.appendValueInput('clause1')
+            .setCheck('boolean')
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(
+                createMinusField(1), 'MINUS1');
+
+        // this.setMutator(new Blockly.Mutator(['my_block_A', 'my_block_B']));
+        this.jsonInit({ "mutator": "and_or_mutator" });
+    },
 };
 
 export {
     compare,
-    and
+    and,
+    or
 };

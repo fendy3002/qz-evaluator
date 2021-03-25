@@ -1,7 +1,7 @@
 import Blockly from 'blockly/core';
 import { createMinusField } from '../fields/minus';
 
-const andMutator = {
+const andOrMutator = {
     // TODO: This should be its own extension. But that requires core changes.
     suppressPrefixSuffix: true,
 
@@ -133,10 +133,10 @@ const andMutator = {
  * Adds the initial plus button to the if block.
  * @this Blockly.Block
  */
-const andHelper = function () {
+const andOrHelper = function () {
     // this.getInput('clause0').insertFieldAt(0, createPlusField(), 'PLUS');
 };
 
 export const register = (registerMutator) => {
-    registerMutator('and_mutator', andMutator, andHelper);
+    registerMutator('and_or_mutator', andOrMutator, andOrHelper);
 };
