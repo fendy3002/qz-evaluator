@@ -1,5 +1,6 @@
 import * as Blockly from 'blockly';
 export * from './comparer';
+export * from './manipulator';
 
 let evaluator = {
     init: function () {

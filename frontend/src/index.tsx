@@ -34,6 +34,13 @@ const blockly = (elem, option?: any) => {
         <block type="and"></block>
         <block type="or"></block>`;
     
+    let manipulator = `
+        <block type="c_number"></block>
+        <block type="c_string"></block>
+        <block type="c_dateto_string"></block>
+        <block type="c_string_todate"></block>`;
+    
+
     // let logic = `
     //     <block type="compare"></block>
     //     <block type="and"></block>
@@ -46,6 +53,9 @@ const blockly = (elem, option?: any) => {
         </category>
         <category name="Properties" colour="20">
             ${properties}
+        </category>
+        <category name="Manipulator" colour="210">
+            ${manipulator}
         </category>
         <category name="Logic" colour="210">
             ${logic}
