@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Logical compare playground</title>
+    <title>QzEvaluator Playground</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css" />
@@ -16,7 +16,7 @@
                 <h1 class="card-title">QzEvaluator Playground</h1>
             </div>
             <div class="card-body">
-                <div id="evaluator"></div>
+                <div id="evaluator" style="height:600px;"></div>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
 
     <script type="text/javascript" src="../public/js/bin/qz_evaluator.js"></script>
     <script>
-                
+        let block = QzEvaluator.blockly(document.getElementById('evaluator'))
     </script>
 </body>
 

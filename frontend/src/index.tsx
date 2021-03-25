@@ -1,7 +1,8 @@
 import Blockly from 'blockly';
+import * as blocks from './blocks';
 let lo = require('lodash');
 
-const QzEvaluator = (elem, option?: any) => {
+const blockly = (elem, option?: any) => {
     let useOption = lo.merge({
         readonly: false
     }, option);
@@ -12,27 +13,37 @@ const QzEvaluator = (elem, option?: any) => {
         elem.classList.remove("d-none");
     };
 
+    for (let prop of Object.keys(blocks)) {
+        Blockly.Blocks[prop] = blocks[prop];
+    }
+
     let properties = `
-        <block type="prop"></block>
+        <block type="prop_string"></block>
+        <block type="prop_number"></block>
+        <block type="prop_boolean"></block>
         <block type="number"></block>
         <block type="string"></block>
         <block type="boolean"></block>
-        <block type="date"></block>
-        <block type="array"></block>`;
+        <block type="date"></block>`;
+    
     let logic = `
-        <block type="compare"></block>
-        <block type="and"></block>
-        <block type="or"></block>
-        <block type="between"></block>
-        <block type="between_ex"></block>`;
+        <block type="compare"></block>`;
+    
+    // let logic = `
+    //     <block type="compare"></block>
+    //     <block type="and"></block>
+    //     <block type="or"></block>
+    //     <block type="between"></block>
+    //     <block type="between_ex"></block>`;
     let toolbox = (window as any).$(`<xml id="toolbox" style="display: none">
         <category name="Misc" colour="290">
-            <block type="start"></block>
+            <block type="evaluator"></block>
         </category>
         <category name="Properties" colour="20">
             ${properties}
         </category>
         <category name="Logic" colour="210">
+            ${logic}
         </category>
         </xml>`);
 
@@ -47,6 +58,7 @@ const QzEvaluator = (elem, option?: any) => {
     });
     setTimeout(() => {
         hide();
+        show();
     }, 300);
 
     let getValue = () => {
@@ -68,4 +80,6 @@ const QzEvaluator = (elem, option?: any) => {
         getValue
     };
 };
-export default QzEvaluator;
+export {
+    blockly
+};

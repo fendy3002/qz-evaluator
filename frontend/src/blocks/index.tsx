@@ -1,11 +1,13 @@
 import * as Blockly from 'blockly';
+export * from './comparer';
+
 let evaluator = {
     init: function () {
         this.setColour(290);
         this.appendValueInput('json')
             .setAlign(Blockly.ALIGN_CENTRE)
             .appendField("Eval")
-            .setCheck(['s_boolean']);
+            .setCheck(['boolean', 'number', 'string']);
 
         this.setDeletable(false);
     }
@@ -54,71 +56,71 @@ const boolean = {
     }
 };
 
-const prop = {
+let prop_string = {
     init: function () {
         this.setColour(20);
-        this.setOutput(true, ["prop"]);
+        this.setOutput(true, ["string"]);
 
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE)
             .appendField('$prop')
             .appendField(new Blockly.FieldTextInput(''), 'prop_name')
-        
-        this.appendValueInput('CONVERTER')
-            .setCheck('converter')
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField('as');
+            .appendField('as string');
     }
 };
-
-const compare = {
+let prop_number = {
     init: function () {
-        this.setColour(210);
-        this.setOutput(true, ["boolean"]);
-        this.setInputsInline(false);
-
-        this.appendValueInput('source')
-            .setAlign(Blockly.ALIGN_CENTRE)
-            .appendField("$compare")
-            .setCheck(['prop', 'date']);
+        this.setColour(20);
+        this.setOutput(true, ["number"]);
 
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE)
-            .appendField('')
-            .appendField(new Blockly.FieldDropdown([
-                ['Equal', "eq"],
-                ['Not equal', "ne"],
-                ['>', "gt"],
-                ['>=', "gte"],
-                ['<', "lt"],
-                ['<=', "lte"],
-                ['Start with', "starts_with"],
-                ['End with', "ends_with"],
-                ['Contains', "contains"],
-                ['Regex', "regex"],
-                ['In', "in"]
-            ]), 'operation');
+            .appendField('$prop')
+            .appendField(new Blockly.FieldTextInput(''), 'prop_name')
+            .appendField('as number');
+    }
+};
+let prop_boolean = {
+    init: function () {
+        this.setColour(20);
+        this.setOutput(true, ["boolean"]);
 
-        this.appendValueInput('compare')
+        this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE)
-            .appendField("")
-            .setCheck([
-                'string',
-                'number',
-                'boolean',
-                'array',
-                'prop',
-                'date',
-            ]);
+            .appendField('$prop')
+            .appendField(new Blockly.FieldTextInput(''), 'prop_name')
+            .appendField('as boolean');
     }
 };
 
+let date = {
+    init: function () {
+        this.setColour(20);
+        this.setOutput(true, ["date"]);
+
+        this.appendValueInput('date_source')
+            .setCheck(['string'])
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField('$date');
+
+        this.appendDummyInput()
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField('formatFrom')
+            .appendField(new Blockly.FieldTextInput(''), 'format_from');
+        this.appendDummyInput()
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField('formatTo')
+            .appendField(new Blockly.FieldTextInput(''), 'format_to');
+    }
+};
 
 export {
     evaluator,
     string,
+    date,
     number,
     boolean,
-    prop,
-    compare
+    prop_string,
+    prop_number,
+    prop_boolean,
 };
