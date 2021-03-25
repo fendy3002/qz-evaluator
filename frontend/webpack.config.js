@@ -6,6 +6,7 @@ const sourceCodes = [{
 }];
 const outputs = [{
     path: path.resolve(__dirname, 'public/js/bin'),
+    library: 'QzEvaluator',
     filename: "[name].js",
 }, {
     path: path.resolve(__dirname, 'dist'),
