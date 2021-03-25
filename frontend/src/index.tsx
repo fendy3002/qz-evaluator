@@ -24,10 +24,10 @@ const blockly = (elem, option?: any) => {
         <block type="prop_string"></block>
         <block type="prop_number"></block>
         <block type="prop_boolean"></block>
+        <block type="prop_date"></block>
         <block type="number"></block>
         <block type="string"></block>
-        <block type="boolean"></block>
-        <block type="date"></block>`;
+        <block type="boolean"></block>`;
     
     let logic = `
         <block type="compare"></block>

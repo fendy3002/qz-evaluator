@@ -92,6 +92,18 @@ let prop_boolean = {
             .appendField('as boolean');
     }
 };
+let prop_date = {
+    init: function () {
+        this.setColour(20);
+        this.setOutput(true, ["date"]);
+
+        this.appendDummyInput()
+            .setAlign(Blockly.ALIGN_CENTRE)
+            .appendField('$prop')
+            .appendField(new Blockly.FieldTextInput(''), 'prop_name')
+            .appendField('as date');
+    }
+};
 
 let date = {
     init: function () {
@@ -123,4 +135,5 @@ export {
     prop_string,
     prop_number,
     prop_boolean,
+    prop_date
 };
