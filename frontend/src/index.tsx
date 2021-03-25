@@ -1,4 +1,5 @@
 import Blockly from 'blockly';
+import * as mutator from './mutator';
 import * as blocks from './blocks';
 let lo = require('lodash');
 
@@ -12,6 +13,8 @@ const blockly = (elem, option?: any) => {
     let show = () => {
         elem.classList.remove("d-none");
     };
+
+    mutator.register(Blockly.Extensions.registerMutator);
 
     for (let prop of Object.keys(blocks)) {
         Blockly.Blocks[prop] = blocks[prop];
@@ -27,7 +30,9 @@ const blockly = (elem, option?: any) => {
         <block type="date"></block>`;
     
     let logic = `
-        <block type="compare"></block>`;
+        <block type="compare"></block>
+        
+        <block type="and"></block>`;
     
     // let logic = `
     //     <block type="compare"></block>

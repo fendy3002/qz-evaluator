@@ -1,4 +1,6 @@
 import * as Blockly from 'blockly';
+import { createPlusField } from '../fields/plus';
+import { createMinusField } from '../fields/minus';
 
 let compare = {
     init: function () {
@@ -8,7 +10,7 @@ let compare = {
 
         this.appendValueInput('source')
             .setAlign(Blockly.ALIGN_CENTRE)
-            .appendField("$compare")
+            .appendField("compare")
             .setCheck(['number', 'date', 'string', 'boolean']);
 
         this.appendDummyInput()
@@ -40,16 +42,40 @@ let compare = {
             ]);
     }
 };
+
 let and = {
     init: function () {
         this.setColour(210);
         this.setOutput(true, ["boolean"]);
 
+        // this.appendStatementInput('EVAL')
+        //     .appendField('and');
         this.appendDummyInput()
-            .setAlign(Blockly.ALIGN_CENTRE)
-            .appendField('"')
-            .appendField(new Blockly.FieldTextInput(''), 'string_value')
-            .appendField('"');
+            .appendField(createPlusField(), "PLUS")
+            .appendField("and");
+
+        this.appendValueInput('clause0')
+            .setCheck('boolean')
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(
+                createMinusField(0), 'MINUS0');
+        this.appendValueInput('clause1')
+            .setCheck('boolean')
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(
+                createMinusField(1), 'MINUS1');
+
+        // this.setMutator(new Blockly.Mutator(['my_block_A', 'my_block_B']));
+        this.jsonInit({ "mutator": "and_mutator" });
+    },
+};
+let or = {
+    init: function () {
+        this.setColour(210);
+        this.setOutput(true, ["boolean"]);
+
+        this.appendStatementInput('EVAL')
+            .appendField('and');
     }
 };
 
