@@ -1,0 +1,24 @@
+{
+  "name": "@fendy3002/qz-evaluator",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "compile-dev": "webpack --mode=development --watch"
+  },
+  "dependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-typescript": "^7.13.0",
+    "babel-loader": "^8.2.2",
+    "blockly": "^4.20201217.0",
+    "css-loader": "^5.2.0",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.2.3",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.5.0"
+  }
+}
