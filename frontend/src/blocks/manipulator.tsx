@@ -157,6 +157,8 @@ let m_sum = {
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(
                 createMinusField(1), 'MINUS1');
+
+        this.jsonInit({ "mutator": "sum_mutator" });
     }
 };
 let s_one = {
