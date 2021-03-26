@@ -5,7 +5,8 @@ import { createMinusField } from '../fields/minus';
 let color = {
     converter: 230,
     math: 250,
-    string: 270
+    string: 270,
+    date: 290
 }
 
 let c_number = {
@@ -234,6 +235,32 @@ let s_three = {
             .appendField(')');
     }
 };
+let d_manipulate = {
+    init: function () {
+        this.setColour(color.string);
+        this.setOutput(true, ["string"]);
+        this.setInputsInline(true);
+
+        this.appendValueInput('left')
+            .setCheck(['date']);
+
+        this.appendDummyInput()
+            .appendField(' add (');
+
+        this.appendValueInput('value')
+            .setCheck(['number']);
+        this.appendDummyInput()
+            .appendField(',');
+        this.appendDummyInput()
+            .setAlign(Blockly.ALIGN_CENTRE)
+            .appendField(new Blockly.FieldDropdown([
+                ['hours', "hours"],
+                ['days', "days"],
+            ]), 'modifier');
+        this.appendDummyInput()
+            .appendField(')');
+    }
+};
 
 export {
     c_number,
@@ -247,4 +274,5 @@ export {
     s_one,
     s_two,
     s_three,
+    d_manipulate,
 };

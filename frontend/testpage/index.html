@@ -32,7 +32,10 @@
 
     <script type="text/javascript" src="../public/js/bin/qz_evaluator.js"></script>
     <script>
-        let block = QzEvaluator.blockly(document.getElementById('evaluator'))
+        let block = QzEvaluator.blockly(document.getElementById('evaluator'), {
+            readonly: false,
+            evalMode: ""
+        });
     </script>
 </body>
 

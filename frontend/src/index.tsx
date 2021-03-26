@@ -3,10 +3,22 @@ import * as mutator from './mutator';
 import * as blocks from './blocks';
 let lo = require('lodash');
 
+export enum EvalMode {
+    ALL = "",
+    NUMBER = "number",
+    BOOLEAN = "boolean",
+};
+export interface Option {
+    readonly?: boolean
+    evalMode?: EvalMode
+};
+
 const blockly = (elem, option?: any) => {
     let useOption = lo.merge({
-        readonly: false
+        readonly: false,
+        evalMode: EvalMode.ALL
     }, option);
+
     let hide = () => {
         elem.classList.add("d-none");
     };
@@ -16,8 +28,9 @@ const blockly = (elem, option?: any) => {
 
     mutator.register(Blockly.Extensions.registerMutator);
 
-    for (let prop of Object.keys(blocks)) {
-        Blockly.Blocks[prop] = blocks[prop];
+    let populatedBlocks = blocks.populate(useOption);
+    for (let prop of Object.keys(populatedBlocks)) {
+        Blockly.Blocks[prop] = populatedBlocks[prop];
     }
 
     let properties = `
@@ -68,6 +81,14 @@ const blockly = (elem, option?: any) => {
                     <field name="number_value">0</field>
                 </block>
             </value>
+        </block>
+        <block type="d_manipulate">
+            <value name="value">
+                <block type="number">
+                    <field name="number_value">1</field>
+                </block>
+            </value>
+            <field name="modifier">days</field>
         </block>
         `;
 
