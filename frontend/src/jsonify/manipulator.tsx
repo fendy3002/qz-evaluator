@@ -102,7 +102,24 @@ let populate = (processBlock) => {
             },
         };
     };
-    
+    let m_sum = (block) => {
+        let length = block.clauseCount_;
+        let result = [];
+        for (let index = 0; index < length; index++) {
+            let source = block.getInputTargetBlock('clause' + index);
+            if (source) {
+                let value = processBlock(source);
+                if (value !== null) {
+                    result.push(value);
+                }
+            }
+            else {
+            }
+        }
+        return {
+            $m_sum: result
+        };
+    }
 
     return {
         c_number,
@@ -115,6 +132,7 @@ let populate = (processBlock) => {
         s_op_one,
         s_op_two,
         s_op_three,
+        m_sum
     };
 };
 
