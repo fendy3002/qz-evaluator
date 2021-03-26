@@ -19,6 +19,9 @@ let parser = (workspace) => {
             else if (key == "$number") {
                 number(block, objSource);
             }
+            else if (key == "$boolean") {
+                boolean(block, objSource);
+            }
         }
     };
     let string = (block, objSource) => {
