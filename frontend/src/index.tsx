@@ -1,6 +1,7 @@
 import Blockly from 'blockly';
 import * as mutator from './mutator';
 import * as blocks from './blocks';
+import * as jsonify from './jsonify';
 let lo = require('lodash');
 
 export enum EvalMode {
@@ -138,7 +139,7 @@ const blockly = (elem, option?: any) => {
     }, 300);
 
     let getValue = () => {
-        return {};
+        return jsonify.jsonify(ws);
         // let currentText = Blockly.logical_compare.toText(Blockly.getMainWorkspace());
         // if (!currentText) {
         //     return null;

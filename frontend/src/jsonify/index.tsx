@@ -1,4 +1,4 @@
-
+import * as comparer from './comparer';
 let jsonify = (workspace) => {
     let top_blocks = workspace.getTopBlocks(false);
     for (let i in top_blocks) {
@@ -13,7 +13,7 @@ let jsonify = (workspace) => {
 let evaluator = (block) => {
     let inputTargetBlock = block.getInputTargetBlock('json');
     if (inputTargetBlock) {
-        let evaluated = blockLogic[inputTargetBlock.type](inputTargetBlock);
+        let evaluated = processBlock(inputTargetBlock);
         return evaluated;
     }
     return {};
@@ -50,7 +50,16 @@ let date = (block) => {
     let string_value = block.getFieldValue('string_value');
     return { $date: string_value };
 };
-let blockLogic = {
+let blockLogic: any = {};
+let processBlock = (block) => {
+    if (blockLogic[block.type]) {
+        return blockLogic[block.type](block);
+    }
+    else {
+        return null;
+    }
+}
+blockLogic = {
     evaluator,
     string,
     number,
@@ -59,7 +68,9 @@ let blockLogic = {
     prop_number,
     prop_boolean,
     prop_date,
-    date
+    date,
+    ...comparer.populate(processBlock)
 };
+
 
 export { jsonify };
