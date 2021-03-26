@@ -28,18 +28,26 @@ const blockly = (elem, option?: any) => {
         <block type="number"></block>
         <block type="string"></block>
         <block type="boolean"></block>`;
-    
+
     let logic = `
         <block type="compare"></block>
         <block type="and"></block>
-        <block type="or"></block>`;
-    
+        <block type="or"></block>
+        `;
+
     let manipulator = `
         <block type="c_number"></block>
         <block type="c_string"></block>
         <block type="c_dateto_string"></block>
-        <block type="c_string_todate"></block>`;
-    
+        <block type="c_string_todate"></block>
+        <block type="m_two"></block>
+        <block type="m_sum"></block>
+        <block type="m_op_one"></block>
+        <block type="m_op_two"></block>
+        <block type="s_one"></block>
+        <block type="s_two"></block>
+        <block type="s_three"></block>
+        `;
 
     // let logic = `
     //     <block type="compare"></block>
@@ -47,9 +55,11 @@ const blockly = (elem, option?: any) => {
     //     <block type="or"></block>
     //     <block type="between"></block>
     //     <block type="between_ex"></block>`;
+    // let misc = `
+    //     <block type="evaluator"></block>
+    // `;
     let toolbox = (window as any).$(`<xml id="toolbox" style="display: none">
         <category name="Misc" colour="290">
-            <block type="evaluator"></block>
         </category>
         <category name="Properties" colour="20">
             ${properties}
@@ -62,7 +72,7 @@ const blockly = (elem, option?: any) => {
         </category>
         </xml>`);
 
-    Blockly.inject(elem, {
+    let ws = Blockly.inject(elem, {
         //rtl: true,
         toolbox: toolbox.get(0),
         //media: 'media/',    // to avoid reaching to the web for icons
@@ -71,6 +81,14 @@ const blockly = (elem, option?: any) => {
         collapse: true, comments: true, disable: false,
         trashcan: true // those ones are automatically true when there are categories
     });
+
+    let addBlock = (ws) => {
+        let block = ws.newBlock('evaluator', true);
+        block.initSvg();
+        block.render();
+    };
+    addBlock(ws);
+
     setTimeout(() => {
         hide();
         show();

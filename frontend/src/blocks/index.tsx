@@ -33,7 +33,7 @@ let number = {
         this.setOutput(true, ["number"]);
 
         let numberValidator = (source => {
-            return source.replace(/[^\\d]/gi, "");
+            return source.replace(/[^0-9-]/gi, "");
         });
 
         this.appendDummyInput()
