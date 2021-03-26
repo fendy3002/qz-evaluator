@@ -148,12 +148,12 @@ let m_sum = {
             .appendField("sum");
 
         this.appendValueInput('clause0')
-            .setCheck('boolean')
+            .setCheck('number')
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(
                 createMinusField(0), 'MINUS0');
         this.appendValueInput('clause1')
-            .setCheck('boolean')
+            .setCheck('number')
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(
                 createMinusField(1), 'MINUS1');

@@ -27,7 +27,15 @@ const blockly = (elem, option?: any) => {
         <block type="prop_date"></block>
         <block type="number"></block>
         <block type="string"></block>
-        <block type="boolean"></block>`;
+        <block type="boolean"></block>
+
+        <block type="date">
+            <field name="string_value">1990-01-01</field>
+        </block>
+        <block type="date">
+            <field name="string_value">NOW</field>
+        </block>
+        `;
 
     let logic = `
         <block type="compare"></block>
@@ -38,15 +46,29 @@ const blockly = (elem, option?: any) => {
     let manipulator = `
         <block type="c_number"></block>
         <block type="c_string"></block>
-        <block type="c_dateto_string"></block>
+        <block type="c_dateto_string">
+            <field name="format_to">YYYY-MM-DD</field>
+        </block>
         <block type="c_string_todate"></block>
         <block type="m_two"></block>
         <block type="m_sum"></block>
         <block type="m_op_one"></block>
-        <block type="m_op_two"></block>
+        <block type="m_op_two">
+            <value name="right">
+                <block type="number">
+                    <field name="number_value">0</field>
+                </block>
+            </value>
+        </block>
         <block type="s_one"></block>
         <block type="s_two"></block>
-        <block type="s_three"></block>
+        <block type="s_three">
+            <value name="middle">
+                <block type="number">
+                    <field name="number_value">0</field>
+                </block>
+            </value>
+        </block>
         `;
 
     // let logic = `

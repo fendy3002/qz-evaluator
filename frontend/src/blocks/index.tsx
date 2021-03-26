@@ -111,19 +111,11 @@ let date = {
         this.setColour(20);
         this.setOutput(true, ["date"]);
 
-        this.appendValueInput('date_source')
-            .setCheck(['string'])
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField('$date');
-
         this.appendDummyInput()
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField('formatFrom')
-            .appendField(new Blockly.FieldTextInput(''), 'format_from');
-        this.appendDummyInput()
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField('formatTo')
-            .appendField(new Blockly.FieldTextInput(''), 'format_to');
+            .setAlign(Blockly.ALIGN_CENTRE)
+            .appendField('"')
+            .appendField(new Blockly.FieldTextInput(''), 'string_value')
+            .appendField('" as date');
     }
 };
 
