@@ -1,8 +1,25 @@
 
 let populate = (processBlock) => {
     let compare = (block) => {
-        let string_value = block.getFieldValue('string_value');
-        return { $string: string_value };
+        let source = block.getInputTargetBlock('source');
+        let operation = block.getFieldValue('operation');
+        let compare = block.getInputTargetBlock('compare');
+
+        let sourceValue = null;
+        if (source) {
+            sourceValue = processBlock(source);
+        }
+        let compareValue = null;
+        if (compare) {
+            compareValue = processBlock(compare);
+        }
+        return {
+            $compare: [
+                sourceValue,
+                operation,
+                compareValue
+            ]
+        };
     };
 
     let and = (block) => {
@@ -35,7 +52,8 @@ let populate = (processBlock) => {
 
     return {
         compare,
-        and
+        and,
+        or
     };
 };
 
