@@ -1,4 +1,5 @@
 import * as comparer from './comparer';
+import * as manipulator from './manipulator';
 let jsonify = (workspace) => {
     let top_blocks = workspace.getTopBlocks(false);
     for (let i in top_blocks) {
@@ -52,7 +53,7 @@ let date = (block) => {
 };
 let blockLogic: any = {};
 let processBlock = (block) => {
-    if (blockLogic[block.type]) {
+    if (block && blockLogic[block.type]) {
         return blockLogic[block.type](block);
     }
     else {
@@ -69,7 +70,8 @@ blockLogic = {
     prop_boolean,
     prop_date,
     date,
-    ...comparer.populate(processBlock)
+    ...comparer.populate(processBlock),
+    ...manipulator.populate(processBlock)
 };
 
 

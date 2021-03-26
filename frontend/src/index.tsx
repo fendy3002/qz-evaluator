@@ -63,7 +63,9 @@ const blockly = (elem, option?: any) => {
         <block type="c_dateto_string">
             <field name="format_to">YYYY-MM-DD</field>
         </block>
-        <block type="c_string_todate"></block>
+        <block type="c_string_todate">
+            <field name="format_from">YYYY-MM-DD</field>
+        </block>
         <block type="m_two"></block>
         <block type="m_sum"></block>
         <block type="m_op_one"></block>

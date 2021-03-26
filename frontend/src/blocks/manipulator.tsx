@@ -52,7 +52,7 @@ let c_dateto_string = {
 let c_string_todate = {
     init: function () {
         this.setColour(color.converter);
-        this.setOutput(true, ["string"]);
+        this.setOutput(true, ["date"]);
         this.setInputsInline(true);
 
         this.appendDummyInput()
@@ -60,7 +60,8 @@ let c_string_todate = {
         this.appendValueInput('source')
             .setCheck(['string']);
         this.appendDummyInput()
-            .appendField('" to date');
+            .appendField('" to date with format ')
+            .appendField(new Blockly.FieldTextInput(''), 'format_from');
     }
 };
 
