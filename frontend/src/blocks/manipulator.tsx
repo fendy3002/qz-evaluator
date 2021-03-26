@@ -163,7 +163,7 @@ let m_sum = {
         this.jsonInit({ "mutator": "sum_mutator" });
     }
 };
-let s_one = {
+let s_op_one = {
     init: function () {
         this.setColour(color.string);
         this.setOutput(true, ["string"]);
@@ -185,7 +185,7 @@ let s_one = {
             .appendField('")');
     }
 };
-let s_two = {
+let s_op_two = {
     init: function () {
         this.setColour(color.string);
         this.setOutput(true, ["string"]);
@@ -210,7 +210,7 @@ let s_two = {
             .appendField(')');
     }
 };
-let s_three = {
+let s_op_three = {
     init: function () {
         this.setColour(color.string);
         this.setOutput(true, ["string"]);
@@ -272,8 +272,8 @@ export {
     m_op_one,
     m_op_two,
     m_sum,
-    s_one,
-    s_two,
-    s_three,
+    s_op_one,
+    s_op_two,
+    s_op_three,
     d_manipulate,
 };

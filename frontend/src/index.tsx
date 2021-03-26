@@ -76,9 +76,9 @@ const blockly = (elem, option?: any) => {
                 </block>
             </value>
         </block>
-        <block type="s_one"></block>
-        <block type="s_two"></block>
-        <block type="s_three">
+        <block type="s_op_one"></block>
+        <block type="s_op_two"></block>
+        <block type="s_op_three">
             <value name="middle">
                 <block type="number">
                     <field name="number_value">0</field>

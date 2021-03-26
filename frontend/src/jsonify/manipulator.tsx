@@ -32,12 +32,89 @@ let populate = (processBlock) => {
             },
         };
     };
+    let m_two = (block) => {
+        let left = block.getInputTargetBlock('left');
+        let operation = block.getFieldValue('operation');
+        let right = block.getInputTargetBlock('right');
+        return {
+            $m_two: {
+                left: processBlock(left),
+                operation: operation,
+                right: processBlock(right)
+            },
+        };
+    };
+    let m_op_one = (block) => {
+        let left = block.getInputTargetBlock('left');
+        let operation = block.getFieldValue('operation');
+        return {
+            $m_op_one: {
+                left: processBlock(left),
+                operation: operation,
+            },
+        };
+    };
+    let m_op_two = (block) => {
+        let left = block.getInputTargetBlock('left');
+        let operation = block.getFieldValue('operation');
+        let right = block.getInputTargetBlock('right');
+        return {
+            $m_op_two: {
+                left: processBlock(left),
+                operation: operation,
+                right: processBlock(right)
+            },
+        };
+    };
+    let s_op_one = (block) => {
+        let left = block.getInputTargetBlock('left');
+        let operation = block.getFieldValue('operation');
+        return {
+            $s_op_one: {
+                left: processBlock(left),
+                operation: operation,
+            },
+        };
+    };
+    let s_op_two = (block) => {
+        let left = block.getInputTargetBlock('left');
+        let operation = block.getFieldValue('operation');
+        let right = block.getInputTargetBlock('right');
+        return {
+            $s_op_two: {
+                left: processBlock(left),
+                operation: operation,
+                right: processBlock(right)
+            },
+        };
+    };
+    let s_op_three = (block) => {
+        let left = block.getInputTargetBlock('left');
+        let operation = block.getFieldValue('operation');
+        let middle = block.getInputTargetBlock('middle');
+        let right = block.getInputTargetBlock('right');
+        return {
+            $s_op_two: {
+                left: processBlock(left),
+                operation: operation,
+                middle: processBlock(middle),
+                right: processBlock(right)
+            },
+        };
+    };
+    
 
     return {
         c_number,
         c_string,
         c_dateto_string,
-        c_string_todate
+        c_string_todate,
+        m_two,
+        m_op_one,
+        m_op_two,
+        s_op_one,
+        s_op_two,
+        s_op_three,
     };
 };
 
