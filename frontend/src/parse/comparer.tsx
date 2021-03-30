@@ -23,11 +23,12 @@ let populate = (workspace, parseObj) => {
         let { cases, elseValue } = objSource['$ifs'];
         let newBlock = workspace.newBlock('ifs', true);
         newBlock.initSvg();
+        newBlock.render(); // don't know why need to render first
 
         let index = 0;
         for (let eachCase of cases) {
             if (index > 0) {
-                newBlock.plus();
+                newBlock.addClause_.bind(newBlock)();
             }
             if (eachCase) {
                 parseObj(
@@ -44,7 +45,6 @@ let populate = (workspace, parseObj) => {
 
         let valueElseInput = newBlock.getInput('value_else');
         parseObj(valueElseInput.connection, elseValue);
-
         let newBlockOutput = newBlock.outputConnection;
         newBlockOutput.connect(parentConnection);
     };
