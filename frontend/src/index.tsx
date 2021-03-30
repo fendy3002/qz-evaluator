@@ -133,13 +133,14 @@ const blockly = (elem, option?: any) => {
     });
     if (useOption.autosave) {
         let saveHandler = null;
+
         ws.addChangeListener(() => {
-            if (saveHandler) {
-                clearTimeout(saveHandler);
+            if (!saveHandler) {
+                saveHandler = setTimeout(() => {
+                    save();
+                    saveHandler = null;
+                }, 1000);
             }
-            saveHandler = setTimeout(() => {
-                save();
-            }, 1000);
         });
     }
     let addBlock = (ws) => {

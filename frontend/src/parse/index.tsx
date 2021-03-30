@@ -1,4 +1,5 @@
 import * as comparer from './comparer';
+import * as manipulator from './manipulator';
 
 let parse = (workspace, objSource) => {
     workspace.clear();
@@ -76,6 +77,14 @@ let parser = (workspace) => {
         let newBlockOutput = newBlock.outputConnection;
         newBlockOutput.connect(parentConnection);
     };
+    let date = (parentConnection, objSource) => {
+        let newBlock = workspace.newBlock('date', true);
+        newBlock.initSvg();
+
+        newBlock.setFieldValue(objSource["$date"], "string_value");
+        let newBlockOutput = newBlock.outputConnection;
+        newBlockOutput.connect(parentConnection);
+    };
 
     let blockLogic: any = {};
     blockLogic = {
@@ -86,7 +95,9 @@ let parser = (workspace) => {
         prop_number,
         prop_boolean,
         prop_date,
-        ...comparer.populate(workspace, obj)
+        date,
+        ...comparer.populate(workspace, obj),
+        ...manipulator.populate(workspace, obj),
     };
 
     return {

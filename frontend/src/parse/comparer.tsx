@@ -72,8 +72,6 @@ let populate = (workspace, parseObj) => {
 
     return {
         compare,
-        // and,
-        // or,
         ifs,
         and: andOr("and"),
         or: andOr("or")
