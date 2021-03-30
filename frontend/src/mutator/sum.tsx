@@ -66,7 +66,7 @@ const mutator = {
      * @this Blockly.Block
      */
     minus: function (index) {
-        if (this.clauseCount_ == 0) {
+        if (this.clauseCount_ <= 2) {
             return;
         }
         this.removeClause_(index);

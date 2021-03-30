@@ -1,7 +1,8 @@
 import Blockly from 'blockly/core';
 import { createMinusField } from '../fields/minus';
 
-const andOrMutator = {
+let supportedValue = ["boolean", "string", "number", "date"];
+const ifsMutator = {
     // TODO: This should be its own extension. But that requires core changes.
     suppressPrefixSuffix: true,
 
@@ -9,7 +10,7 @@ const andOrMutator = {
      * Number of clauseCount inputs on this block.
      * @type {number}
      */
-    clauseCount_: 2,
+    clauseCount_: 1,
 
     /**
      * Creates XML to represent the number of else-if and else inputs.
@@ -31,7 +32,7 @@ const andOrMutator = {
      * @this Blockly.Block
      */
     domToMutation: function (xmlElement) {
-        const targetCount = parseInt(xmlElement.getAttribute('clausecount'), 10) || 2;
+        const targetCount = parseInt(xmlElement.getAttribute('clausecount'), 10) || 1;
         this.updateShape_(targetCount);
     },
 
@@ -66,7 +67,7 @@ const andOrMutator = {
      * @this Blockly.Block
      */
     minus: function (index) {
-        if (this.clauseCount_ <= 2) {
+        if (this.clauseCount_ <= 1) {
             return;
         }
         this.removeClause_(index);
@@ -81,9 +82,16 @@ const andOrMutator = {
         // Because else-if inputs are 1-indexed we increment first, decrement last.
         this.appendValueInput('clause' + this.clauseCount_)
             .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("else if")
             .setCheck('boolean')
             .appendField(
                 createMinusField(this.clauseCount_), 'MINUS' + this.clauseCount_);
+        this.appendValueInput('value' + this.clauseCount_)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("then")
+            .setCheck(supportedValue);
+
+        this.moveInputBefore('value_else', /* put at end */ null);
         this.clauseCount_++;
     },
 
@@ -106,24 +114,40 @@ const andOrMutator = {
         if (opt_index !== undefined && opt_index != this.clauseCount_) {
             const clauseIndex = opt_index;
             const inputs = this.inputList;
-            if (inputs[clauseIndex + 1]) {
-                let connection = inputs[clauseIndex + 1].connection; // If connection.
+            if (inputs[clauseIndex * 2 + 1]) {
+                let connection = inputs[clauseIndex * 2 + 1].connection; // If connection.
+                if (connection && connection.isConnected()) {
+                    connection.disconnect();
+                }
+            }
+            if (inputs[clauseIndex * 2 + 2]) {
+                let connection = inputs[clauseIndex * 2 + 2].connection; // then connection.
                 if (connection && connection.isConnected()) {
                     connection.disconnect();
                 }
             }
 
             this.bumpNeighbours();
-            for (let i = clauseIndex + 1, input; (input = this.inputList[i]); i++) {
-                if (!input) { break; }
-                const targetConnection = input.connection.targetConnection;
-                if (targetConnection && this.inputList[i - 1] && this.inputList[i - 1].connection) {
-                    this.inputList[i - 1].connection.connect(targetConnection);
+            for (let i = clauseIndex * 2 + 3; i < this.inputList.length - 1; i += 2) {
+                let clauseInput = this.inputList[i];
+                if (clauseInput.name == "value_else") { break; }
+                else if (!clauseInput) { break; }
+                else {
+                    let valueInput = this.inputList[i + 1];
+                    const clauseTargetConnection = clauseInput.connection.targetConnection;
+                    if (clauseTargetConnection && this.inputList[i - 2] && this.inputList[i - 3].connection) {
+                        this.inputList[i - 2].connection.connect(clauseTargetConnection);
+                    }
+                    const valueTargetConnection = valueInput.connection.targetConnection;
+                    if (valueTargetConnection && this.inputList[i - 1] && this.inputList[i - 1].connection) {
+                        this.inputList[i - 1].connection.connect(valueTargetConnection);
+                    }
                 }
             }
         }
 
         this.removeInput('clause' + (this.clauseCount_ - 1));
+        this.removeInput('value' + (this.clauseCount_ - 1));
         // Because else-if inputs are 1-indexed we increment first, decrement last.
         this.clauseCount_--;
     },
@@ -133,10 +157,10 @@ const andOrMutator = {
  * Adds the initial plus button to the if block.
  * @this Blockly.Block
  */
-const andOrHelper = function () {
+const ifsHelper = function () {
     // this.getInput('clause0').insertFieldAt(0, createPlusField(), 'PLUS');
 };
 
 export const register = (registerMutator) => {
-    registerMutator('and_or_mutator', andOrMutator, andOrHelper);
+    registerMutator('ifs_mutator', ifsMutator, ifsHelper);
 };

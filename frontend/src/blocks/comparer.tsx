@@ -56,14 +56,10 @@ let and = {
 
         this.appendValueInput('clause0')
             .setCheck('boolean')
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(
-                createMinusField(0), 'MINUS0');
+            .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput('clause1')
             .setCheck('boolean')
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(
-                createMinusField(1), 'MINUS1');
+            .setAlign(Blockly.ALIGN_RIGHT);
 
         // this.setMutator(new Blockly.Mutator(['my_block_A', 'my_block_B']));
         this.jsonInit({ "mutator": "and_or_mutator" });
@@ -82,22 +78,46 @@ let or = {
 
         this.appendValueInput('clause0')
             .setCheck('boolean')
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(
-                createMinusField(0), 'MINUS0');
+            .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput('clause1')
             .setCheck('boolean')
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(
-                createMinusField(1), 'MINUS1');
+            .setAlign(Blockly.ALIGN_RIGHT);
 
         // this.setMutator(new Blockly.Mutator(['my_block_A', 'my_block_B']));
         this.jsonInit({ "mutator": "and_or_mutator" });
+    },
+};
+let ifs = {
+    init: function () {
+        let supportedValue = ["boolean", "string", "number", "date"];
+        this.setColour(210);
+        this.setOutput(true, supportedValue);
+        this.setInputsInline(false);
+
+        this.appendDummyInput()
+            .appendField(createPlusField(), "PLUS");
+
+        this.appendValueInput('clause0')
+            .setCheck('boolean')
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("if");
+        this.appendValueInput('value0')
+            .setCheck(supportedValue)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("then");
+
+        this.appendValueInput('value_else')
+            .setCheck(supportedValue)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("else");
+        // this.setMutator(new Blockly.Mutator(['my_block_A', 'my_block_B']));
+        this.jsonInit({ "mutator": "ifs_mutator" });
     },
 };
 
 export {
     compare,
     and,
-    or
+    or,
+    ifs
 };
