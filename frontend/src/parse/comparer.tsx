@@ -19,11 +19,41 @@ let populate = (workspace, parseObj) => {
         newBlockOutput.connect(parentConnection);
     };
 
+    let ifs = (parentConnection, objSource) => {
+        let { cases, elseValue } = objSource['$ifs'];
+        let newBlock = workspace.newBlock('ifs', true);
+        newBlock.initSvg();
+
+        let index = 0;
+        for (let eachCase of cases) {
+            if (index > 0) {
+                newBlock.plus();
+            }
+            if (eachCase) {
+                parseObj(
+                    newBlock.getInput(`clause${index}`).connection,
+                    eachCase.clause
+                );
+                parseObj(
+                    newBlock.getInput(`value${index}`).connection,
+                    eachCase.value
+                );
+            }
+            index++;
+        }
+
+        let valueElseInput = newBlock.getInput('value_else');
+        parseObj(valueElseInput.connection, elseValue);
+
+        let newBlockOutput = newBlock.outputConnection;
+        newBlockOutput.connect(parentConnection);
+    };
+
     return {
         compare,
         // and,
         // or,
-        // ifs
+        ifs
     };
 };
 

@@ -69,9 +69,9 @@ let populate = (processBlock) => {
             }
         }
         return {
-            $if: {
+            $ifs: {
                 cases: cases,
-                else: processBlock(elseInput)
+                elseValue: processBlock(elseInput)
             }
         };
     }

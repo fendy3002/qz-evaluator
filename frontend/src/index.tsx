@@ -55,10 +55,10 @@ const blockly = (elem, option?: any) => {
         `;
 
     let logic = `
+        <block type="ifs"></block>
         <block type="compare"></block>
         <block type="and"></block>
         <block type="or"></block>
-        <block type="ifs"></block>
         `;
 
     let manipulator = `
