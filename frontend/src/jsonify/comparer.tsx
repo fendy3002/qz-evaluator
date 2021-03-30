@@ -50,10 +50,37 @@ let populate = (processBlock) => {
         return result;
     };
 
+    let ifs = (block) => {
+        let cases = [];
+        let elseInput = block.getInputTargetBlock('value_else');
+        for (let index = 0; index < length; index++) {
+            let clauseBlock = block.getInputTargetBlock('clause' + index);
+            if (clauseBlock) {
+                let clauseValue = processBlock(clauseBlock);
+                if (clauseValue !== null) {
+                    let valueBlock = block.getInputTargetBlock('value' + index);
+                    cases.push({
+                        clause: clauseValue,
+                        value: valueBlock
+                    });
+                }
+            }
+            else {
+            }
+        }
+        return {
+            $if: {
+                clauses: [],
+                else: processBlock(elseInput)
+            }
+        };
+    }
+
     return {
         compare,
         and,
-        or
+        or,
+        ifs
     };
 };
 
