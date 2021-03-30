@@ -19,6 +19,27 @@ let populate = (workspace, parseObj) => {
         newBlockOutput.connect(parentConnection);
     };
 
+    let andOr = (operation) => (parentConnection, objSource) => {
+        let cases = objSource['$' + operation];
+        let newBlock = workspace.newBlock(operation, true);
+        newBlock.initSvg();
+        newBlock.render(); // don't know why need to render first
+
+        let index = 0;
+        for (let eachCase of cases) {
+            if (index > 1) {
+                newBlock.addClause_.bind(newBlock)();
+            }
+            parseObj(
+                newBlock.getInput(`clause${index}`).connection,
+                eachCase
+            );
+            index++;
+        }
+        let newBlockOutput = newBlock.outputConnection;
+        newBlockOutput.connect(parentConnection);
+    }
+
     let ifs = (parentConnection, objSource) => {
         let { cases, elseValue } = objSource['$ifs'];
         let newBlock = workspace.newBlock('ifs', true);
@@ -53,7 +74,9 @@ let populate = (workspace, parseObj) => {
         compare,
         // and,
         // or,
-        ifs
+        ifs,
+        and: andOr("and"),
+        or: andOr("or")
     };
 };
 
