@@ -99,7 +99,7 @@ let ifs = {
 
         this.appendValueInput('clause0')
             .setCheck('boolean')
-            .setAlign(Blockly.ALIGN_RIGHT)
+            .setAlign(Blockly.ALIGN_LEFT)
             .appendField("if");
         this.appendValueInput('value0')
             .setCheck(supportedValue)
@@ -108,8 +108,8 @@ let ifs = {
 
         this.appendValueInput('value_else')
             .setCheck(supportedValue)
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField("else");
+            .setAlign(Blockly.ALIGN_LEFT)
+            .appendField("else      ");
         // this.setMutator(new Blockly.Mutator(['my_block_A', 'my_block_B']));
         this.jsonInit({ "mutator": "ifs_mutator" });
     },
