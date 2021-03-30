@@ -34,11 +34,24 @@ let populate = (workspace, parseObj) => {
         let newBlockOutput = newBlock.outputConnection;
         newBlockOutput.connect(parentConnection);
     };
+    let c_string_todate = (parentConnection, objSource) => {
+        let { source, format_from } = objSource['$c_string_todate'];
+        let newBlock = workspace.newBlock('c_string_todate', true);
+        newBlock.initSvg();
+
+        let sourceInput = newBlock.getInput('source');
+        parseObj(sourceInput.connection, source);
+        newBlock.setFieldValue(format_from, "format_from");
+
+        let newBlockOutput = newBlock.outputConnection;
+        newBlockOutput.connect(parentConnection);
+    };
 
     return {
         c_number,
         c_string,
-        c_dateto_string
+        c_dateto_string,
+        c_string_todate
     };
 };
 
