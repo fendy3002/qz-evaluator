@@ -51,6 +51,7 @@ let populate = (processBlock) => {
     };
 
     let ifs = (block) => {
+        let length = block.clauseCount_;
         let cases = [];
         let elseInput = block.getInputTargetBlock('value_else');
         for (let index = 0; index < length; index++) {
@@ -59,18 +60,17 @@ let populate = (processBlock) => {
                 let clauseValue = processBlock(clauseBlock);
                 if (clauseValue !== null) {
                     let valueBlock = block.getInputTargetBlock('value' + index);
+                    let value = processBlock(valueBlock);
                     cases.push({
                         clause: clauseValue,
-                        value: valueBlock
+                        value: value
                     });
                 }
-            }
-            else {
             }
         }
         return {
             $if: {
-                clauses: [],
+                cases: cases,
                 else: processBlock(elseInput)
             }
         };
