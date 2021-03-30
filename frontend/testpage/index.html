@@ -33,9 +33,11 @@
     <script type="text/javascript" src="../public/js/bin/qz_evaluator.js"></script>
     <script>
         let block = QzEvaluator.blockly(document.getElementById('evaluator'), {
+            autosave: true,
             readonly: false,
             evalMode: ""
         });
+        block.load();
     </script>
 </body>
 

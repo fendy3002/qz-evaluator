@@ -11,12 +11,14 @@ export enum EvalMode {
     BOOLEAN = "boolean",
 };
 export interface Option {
-    readonly?: boolean
+    autosave?: boolean,
+    readonly?: boolean,
     evalMode?: EvalMode
 };
 
 const blockly = (elem, option?: any) => {
     let useOption = lo.merge({
+        autosave: false,
         readonly: false,
         evalMode: EvalMode.ALL
     }, option);
@@ -129,7 +131,17 @@ const blockly = (elem, option?: any) => {
         collapse: true, comments: true, disable: false,
         trashcan: true // those ones are automatically true when there are categories
     });
-
+    if (useOption.autosave) {
+        let saveHandler = null;
+        ws.addChangeListener(() => {
+            if (saveHandler) {
+                clearTimeout(saveHandler);
+            }
+            saveHandler = setTimeout(() => {
+                save();
+            }, 1000);
+        });
+    }
     let addBlock = (ws) => {
         let block = ws.newBlock('evaluator', true);
         block.initSvg();
@@ -155,11 +167,23 @@ const blockly = (elem, option?: any) => {
         parse.parse(ws, jsonValue);
         // Blockly.logical_compare.parseText(JSON.stringify(jsonValue), Blockly.getMainWorkspace());
     };
+    let id = elem.id ?? "";
+    let save = () => {
+        localStorage.setItem('_jsonval_' + id, JSON.stringify(getValue()));
+    };
+    let load = () => {
+        let _jsonval = localStorage.getItem('_jsonval_' + id);
+        if (_jsonval) {
+            parseJson(JSON.parse(_jsonval));
+        }
+    };
     return {
         hide,
         show,
         parseJson,
-        getValue
+        getValue,
+        save,
+        load
     };
 };
 export {

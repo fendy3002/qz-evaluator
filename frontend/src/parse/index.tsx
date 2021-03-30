@@ -1,3 +1,4 @@
+import * as comparer from './comparer';
 
 let parse = (workspace, objSource) => {
     workspace.clear();
@@ -9,6 +10,9 @@ let parse = (workspace, objSource) => {
 };
 let parser = (workspace) => {
     let obj = (parentConnection, objSource) => {
+        if (!objSource) {
+            return;
+        }
         for (let key of Object.keys(objSource)) {
             let blockType = key.substring(1);
             blockLogic[blockType]?.(parentConnection, objSource);
@@ -73,7 +77,8 @@ let parser = (workspace) => {
         newBlockOutput.connect(parentConnection);
     };
 
-    let blockLogic = {
+    let blockLogic: any = {};
+    blockLogic = {
         string,
         number,
         boolean,
@@ -81,6 +86,7 @@ let parser = (workspace) => {
         prop_number,
         prop_boolean,
         prop_date,
+        ...comparer.populate(workspace, obj)
     };
 
     return {
