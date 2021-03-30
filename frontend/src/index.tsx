@@ -1,7 +1,8 @@
-import Blockly from 'blockly';
+import Blockly, { Workspace } from 'blockly';
 import * as mutator from './mutator';
 import * as blocks from './blocks';
 import * as jsonify from './jsonify';
+import * as parse from './parse';
 let lo = require('lodash');
 
 export enum EvalMode {
@@ -151,6 +152,7 @@ const blockly = (elem, option?: any) => {
     };
 
     let parseJson = (jsonValue) => {
+        parse.parse(ws, jsonValue);
         // Blockly.logical_compare.parseText(JSON.stringify(jsonValue), Blockly.getMainWorkspace());
     };
     return {
