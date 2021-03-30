@@ -151,14 +151,10 @@ let m_sum = {
 
         this.appendValueInput('clause0')
             .setCheck('number')
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(
-                createMinusField(0), 'MINUS0');
+            .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput('clause1')
             .setCheck('number')
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(
-                createMinusField(1), 'MINUS1');
+            .setAlign(Blockly.ALIGN_RIGHT);
 
         this.jsonInit({ "mutator": "sum_mutator" });
     }

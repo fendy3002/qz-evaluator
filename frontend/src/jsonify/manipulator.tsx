@@ -94,7 +94,7 @@ let populate = (processBlock) => {
         let middle = block.getInputTargetBlock('middle');
         let right = block.getInputTargetBlock('right');
         return {
-            $s_op_two: {
+            $s_op_three: {
                 left: processBlock(left),
                 operation: operation,
                 middle: processBlock(middle),
@@ -120,6 +120,16 @@ let populate = (processBlock) => {
             $m_sum: result
         };
     }
+    let d_manipulate = (block) => {
+        let left = block.getInputTargetBlock('left');
+        let modifier = block.getFieldValue('modifier');
+        let value = block.getInputTargetBlock('value');
+        return {
+            left: left,
+            modifier: modifier,
+            value: value,
+        };
+    };
 
     return {
         c_number,
@@ -132,7 +142,8 @@ let populate = (processBlock) => {
         s_op_one,
         s_op_two,
         s_op_three,
-        m_sum
+        m_sum,
+        d_manipulate
     };
 };
 
