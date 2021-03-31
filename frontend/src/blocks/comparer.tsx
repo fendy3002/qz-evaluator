@@ -43,6 +43,39 @@ let compare = {
     }
 };
 
+let betweenRaw = (label) => {
+    return {
+        init: function () {
+            this.setColour(210);
+            this.setOutput(true, ["boolean"]);
+            this.setInputsInline(false);
+
+            let checkWhitelist = [
+                'string',
+                'number',
+                'date',
+            ];
+            this.appendValueInput('source')
+                .setAlign(Blockly.ALIGN_RIGHT)
+                .appendField("value")
+                .setCheck(checkWhitelist);
+
+            this.appendValueInput('min')
+                .setAlign(Blockly.ALIGN_RIGHT)
+                .appendField(`is ${label}`)
+                .setCheck(checkWhitelist);
+
+            this.appendValueInput('max')
+                .setAlign(Blockly.ALIGN_RIGHT)
+                .appendField(`and`)
+                .setCheck(checkWhitelist);
+        }
+    };
+};
+
+let between = betweenRaw("between");
+let between_ex = betweenRaw("betweenEx");
+
 let and = {
     init: function () {
         this.setColour(210);
@@ -119,5 +152,7 @@ export {
     compare,
     and,
     or,
-    ifs
+    ifs,
+    between,
+    between_ex
 };

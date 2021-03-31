@@ -59,6 +59,8 @@ const blockly = (elem, option?: any) => {
         <block type="compare"></block>
         <block type="and"></block>
         <block type="or"></block>
+        <block type="between"></block>
+        <block type="between_ex"></block>
         `;
 
     let manipulator = `

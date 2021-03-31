@@ -70,11 +70,36 @@ let populate = (workspace, parseObj) => {
         newBlockOutput.connect(parentConnection);
     };
 
+    let betweenRaw = (key) => (parentConnection, objSource) => {
+        let { source, min, max } = objSource['$' + key];
+
+        let newBlock = workspace.newBlock(key, true);
+        newBlock.initSvg();
+        
+        parseObj(
+            newBlock.getInput(`source`).connection,
+            source
+        );
+        parseObj(
+            newBlock.getInput(`min`).connection,
+            min
+        );
+        parseObj(
+            newBlock.getInput(`max`).connection,
+            max
+        );
+
+        let newBlockOutput = newBlock.outputConnection;
+        newBlockOutput.connect(parentConnection);
+    }
+
     return {
         compare,
         ifs,
         and: andOr("and"),
-        or: andOr("or")
+        or: andOr("or"),
+        between: betweenRaw("between"),
+        between_ex: betweenRaw("between_ex")
     };
 };
 

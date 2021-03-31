@@ -75,12 +75,47 @@ let populate = (processBlock) => {
             }
         };
     }
+    let betweenRaw = (block) => {
+        let min = block.getInputTargetBlock('min');
+        let source = block.getInputTargetBlock('source');
+        let max = block.getInputTargetBlock('max');
+
+        let minValue = null;
+        if (min) {
+            minValue = processBlock(min);
+        }
+        let sourceValue = null;
+        if (source) {
+            sourceValue = processBlock(source);
+        }
+        let maxValue = null;
+        if (max) {
+            maxValue = processBlock(max);
+        }
+        return {
+            source: sourceValue,
+            min: minValue,
+            max: maxValue
+        };
+    };
+    let between = (block) => {
+        return {
+            $between: betweenRaw(block)
+        };
+    };
+    let between_ex = (block) => {
+        return {
+            $between_ex: betweenRaw(block)
+        };
+    };
 
     return {
         compare,
         and,
         or,
-        ifs
+        ifs,
+        between,
+        between_ex
     };
 };
 
