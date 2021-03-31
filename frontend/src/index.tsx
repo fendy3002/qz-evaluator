@@ -163,7 +163,6 @@ const blockly = (elem, option?: any) => {
                 "selected",
                 "toolbox_item_select"
             ].indexOf(evt.type) < 0) {
-                console.log(evt.type, evt);
                 if (!saveHandler) {
                     saveHandler = setTimeout(() => {
                         save();
