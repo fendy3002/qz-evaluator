@@ -1,19 +1,19 @@
 
 let populate = (workspace, parseObj) => {
     let compare = (parentConnection, objSource) => {
-        let [
-            sourceValue,
+        let {
+            source,
             operation,
-            compareValue
-        ] = objSource['$compare'];
+            compare
+        } = objSource['$compare'];
         let newBlock = workspace.newBlock('compare', true);
         newBlock.initSvg();
 
         let sourceInput = newBlock.getInput('source');
-        parseObj(sourceInput.connection, sourceValue);
+        parseObj(sourceInput.connection, source);
         newBlock.setFieldValue(operation, "operation");
         let compareInput = newBlock.getInput('compare');
-        parseObj(compareInput.connection, compareValue);
+        parseObj(compareInput.connection, compare);
 
         let newBlockOutput = newBlock.outputConnection;
         newBlockOutput.connect(parentConnection);
@@ -75,7 +75,7 @@ let populate = (workspace, parseObj) => {
 
         let newBlock = workspace.newBlock(key, true);
         newBlock.initSvg();
-        
+
         parseObj(
             newBlock.getInput(`source`).connection,
             source

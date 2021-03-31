@@ -14,11 +14,11 @@ let populate = (processBlock) => {
             compareValue = processBlock(compare);
         }
         return {
-            $compare: [
-                sourceValue,
-                operation,
-                compareValue
-            ]
+            $compare: {
+                source: sourceValue,
+                operation: operation,
+                compare: compareValue
+            }
         };
     };
 
