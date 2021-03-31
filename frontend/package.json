@@ -1,5 +1,5 @@
 {
-  "name": "@fendy3002/qz-evaluator",
+  "name": "@fendy3002/qz-evaluator-dom",
   "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",

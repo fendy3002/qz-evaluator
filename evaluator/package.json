@@ -1,0 +1,17 @@
+{
+  "name": "@fendy3002/qz-evaluator",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha 'test/**/*.spec.ts'"
+  },
+  "devDependencies": {
+    "mocha": "^8.3.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "js-yaml": "^4.0.0"
+  }
+}
