@@ -1,5 +1,7 @@
 import * as comparer from './comparer';
 import * as manipulator from './manipulator';
+
+import * as helper from './helper';
 let jsonify = (workspace) => {
     let top_blocks = workspace.getTopBlocks(false);
     for (let i in top_blocks) {
@@ -25,7 +27,7 @@ let string = (block) => {
 };
 let number = (block) => {
     let number_value = Number(block.getFieldValue('number_value'));
-    return { $number: number_value };
+    return { $number: helper.safeParseFloat(number_value) };
 };
 let boolean = (block) => {
     let bool_value = block.getFieldValue('bool_value');
