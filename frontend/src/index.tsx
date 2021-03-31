@@ -136,6 +136,14 @@ const blockly = (elem, option?: any) => {
     let ws = Blockly.inject(elem, {
         //rtl: true,
         toolbox: toolbox.get(0),
+        zoom: {
+            controls: true,
+            wheel: true,
+            pinch: true,
+            startScale: 0.9,
+            minScale: 0.6,
+            maxScale: 2,
+        },
         //media: 'media/',    // to avoid reaching to the web for icons
         sounds: false,
         readOnly: useOption.readonly,
