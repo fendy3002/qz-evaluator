@@ -101,7 +101,6 @@ let m_op_one = {
                 ['FLOOR', "floor"],
                 ['CEIL', "ceil"],
                 ['ROUND', "round"],
-                ['AVG', "avg"],
                 ['ROOT', "root"],
                 ['LOG', "log"],
             ]), 'operation')
