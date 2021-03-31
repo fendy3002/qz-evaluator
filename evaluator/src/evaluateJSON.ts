@@ -1,14 +1,19 @@
 import * as types from './types';
-let logicBlocks: any = {
-    
-};
+import evaluateProps from './evaluateProps';
+let logicBlocks: any = {};
 let processLogicBlock: types.ProcessLogicBlock = (data, obj: any) => {
     for (let key of Object.keys(obj)) {
-        logicBlocks[key]?.(data, obj);
+        let logicType = key.substring(1);
+        return logicBlocks[logicType]?.(data, obj);
     }
 };
-let evaluate = (data: any, obj: any) => {
+logicBlocks = {
+    ...logicBlocks,
+    ...evaluateProps(processLogicBlock)
+};
 
+let evaluate = (data: any, obj: any) => {
+    return processLogicBlock(data, obj);
 };
 
 export {
