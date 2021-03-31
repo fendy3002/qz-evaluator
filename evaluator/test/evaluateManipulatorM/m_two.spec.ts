@@ -13,7 +13,8 @@ mocha.describe('Evaluate Manipulator m_two', function () {
             }
         });
         assert.equal(70, result);
-    });mocha.it('should evaluate m_two mod', async function () {
+    });
+    mocha.it('should evaluate m_two mod', async function () {
         let result = evaluateJSON.evaluate({}, {
             $m_two: {
                 left: { $number: 10 },
