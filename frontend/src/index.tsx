@@ -145,12 +145,21 @@ const blockly = (elem, option?: any) => {
     if (useOption.autosave) {
         let saveHandler = null;
 
-        ws.addChangeListener(() => {
-            if (!saveHandler) {
-                saveHandler = setTimeout(() => {
-                    save();
-                    saveHandler = null;
-                }, 1000);
+        ws.addChangeListener((evt) => {
+            // exclude non-changing events
+            if ([
+                "click",
+                "drag",
+                "selected",
+                "toolbox_item_select"
+            ].indexOf(evt.type) < 0) {
+                console.log(evt.type, evt);
+                if (!saveHandler) {
+                    saveHandler = setTimeout(() => {
+                        save();
+                        saveHandler = null;
+                    }, 1000);
+                }
             }
         });
     }
