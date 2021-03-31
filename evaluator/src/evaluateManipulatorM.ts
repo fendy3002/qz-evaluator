@@ -56,10 +56,18 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
         };
         return map[operation]();
     };
+    let m_sum = (data, obj) => {
+        let result = 0;
+        for (let each of obj['$m_sum']) {
+            result += processLogicBlock(data, each);
+        }
+        return result;
+    };
 
     return {
         m_two,
         m_op_one,
         m_op_two,
-    }
+        m_sum
+    };
 };
