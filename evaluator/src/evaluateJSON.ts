@@ -1,5 +1,6 @@
 import * as types from './types';
 import evaluateProps from './evaluateProps';
+import evaluateLogic from './evaluateLogic';
 let logicBlocks: any = {};
 let processLogicBlock: types.ProcessLogicBlock = (data, obj: any) => {
     for (let key of Object.keys(obj)) {
@@ -9,7 +10,8 @@ let processLogicBlock: types.ProcessLogicBlock = (data, obj: any) => {
 };
 logicBlocks = {
     ...logicBlocks,
-    ...evaluateProps(processLogicBlock)
+    ...evaluateProps(processLogicBlock),
+    ...evaluateLogic(processLogicBlock)
 };
 
 let evaluate = (data: any, obj: any) => {

@@ -27,7 +27,7 @@ let compare = {
                 ['End with', "ends_with"],
                 ['Contains', "contains"],
                 ['Regex', "regex"],
-                ['In', "in"]
+                // ['In', "in"]
             ]), 'operation');
 
         this.appendValueInput('compare')
