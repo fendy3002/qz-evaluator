@@ -14,20 +14,20 @@ let evaluateJsonArr = (data, obj) => {
     }
     return result;
 };
-let fromJSON = (logicObj) => {
+export const fromJSON = (logicObj) => {
     return {
         evaluate: (data) => evaluateJSON.evaluate(data, logicObj),
         evaluateArray: (data) => evaluateJsonArr(data, logicObj)
     };
 };
-let fromYAML = (logicYaml) => {
+export const fromYAML = (logicYaml) => {
     let logicObj = yaml.load(logicYaml);
     return {
         evaluate: (data) => evaluateJSON.evaluate(data, logicObj),
         evaluateArray: (data) => evaluateJsonArr(data, logicObj)
     };
 };
-export const service: types.Service = {
+const service: types.Service = {
     fromJSON,
     fromYAML,
 };
