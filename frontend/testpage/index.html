@@ -112,9 +112,21 @@
             !block.getValue() ||
             Object.keys(block.getValue()).length == 0
         ) {
-            block.parseJson(
-                { "$compare": { "source": { "$prop_date": "Birth" }, "operation": "lt", "compare": { "$date": "2005-01-01" } } }
-            );
+            block.parseJson({
+                "$m_sum": [
+                    {
+                        "$array_handle": {
+                            "source": {
+                                "$prop_array": "Sales"
+                            },
+                            "operation": "map",
+                            "handler": {
+                                "$prop_number": "each.Value"
+                            }
+                        }
+                    }
+                ]
+            });
         }
 
         let initEvaluatedData = () => {
@@ -126,10 +138,10 @@
                     "Birth": "1993-07-20",
                     "Rank": 3,
                     "Sales": [
-                        {"Month": 0, "Value": 1000},
-                        {"Month": 1, "Value": 1500},
-                        {"Month": 2, "Value": 2000},
-                        {"Month": 3, "Value": 3000}
+                        { "Month": 0, "Value": 1000 },
+                        { "Month": 1, "Value": 1500 },
+                        { "Month": 2, "Value": 2000 },
+                        { "Month": 3, "Value": 3000 }
                     ]
                 };
                 $("#evaluated_data").html(JSON.stringify(defaultData, null, 4));
