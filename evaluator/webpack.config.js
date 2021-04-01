@@ -1,7 +1,7 @@
 const path = require('path');
 const sourceCodes = [{
     entry: {
-        "qz_evaluator": path.resolve(__dirname, "src/index.tsx"),
+        "qz_evaluator": path.resolve(__dirname, "src/index.ts"),
     },
     output: {
         path: path.resolve(__dirname, '../frontend/public/js/bin'),

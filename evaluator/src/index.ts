@@ -1,4 +1,4 @@
-import yaml = require('js-yaml');
+import * as yaml from 'js-yaml';
 import * as types from './types';
 import * as evaluateJSON from './evaluateJSON';
 
