@@ -24,9 +24,20 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
         let value = processLogicBlock(data, obj["$var_length"]);
         return value.length;
     };
+    let d_manipulate = (data, obj) => {
+        let {
+            left,
+            modifier,
+            value,
+        } = obj["$d_manipulate"];
+        let leftValue = processLogicBlock(data, left);
+        let computedValue = processLogicBlock(data, value);
+        return moment(leftValue).add(computedValue, modifier);
+    };
 
     return {
         array_handle,
-        var_length
+        var_length,
+        d_manipulate
     };
 };
