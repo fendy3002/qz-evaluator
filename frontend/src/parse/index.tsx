@@ -1,5 +1,6 @@
 import * as comparer from './comparer';
 import * as manipulator from './manipulator';
+import * as array from './array';
 
 let parse = (workspace, objSource) => {
     let top_blocks = workspace.getTopBlocks(false);
@@ -109,6 +110,7 @@ let parser = (workspace) => {
         date,
         ...comparer.populate(workspace, obj),
         ...manipulator.populate(workspace, obj),
+        ...array.populate(workspace, obj),
     };
 
     return {

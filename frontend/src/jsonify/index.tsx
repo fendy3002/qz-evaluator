@@ -1,5 +1,6 @@
 import * as comparer from './comparer';
 import * as manipulator from './manipulator';
+import * as array from './array';
 
 import * as helper from './helper';
 let jsonify = (workspace) => {
@@ -73,7 +74,8 @@ blockLogic = {
     prop_date,
     date,
     ...comparer.populate(processBlock),
-    ...manipulator.populate(processBlock)
+    ...manipulator.populate(processBlock),
+    ...array.populate(processBlock),
 };
 
 

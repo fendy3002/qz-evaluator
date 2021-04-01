@@ -64,21 +64,8 @@ let array_handle = {
             .appendField(")");
     }
 };
-let array_length = {
-    init: function () {
-        this.setColour(color.manipulator);
-        this.setOutput(true, "array");
-        this.setInputsInline(true);
-
-        this.appendValueInput('source')
-            .setCheck("array");
-        this.appendDummyInput()
-            .appendField(".length");
-    }
-};
 export {
     array,
     prop_array,
-    array_handle,
-    array_length
+    array_handle
 };

@@ -177,11 +177,11 @@ let populate = (workspace, parseObj) => {
         newBlockOutput.connect(parentConnection);
     };
     let d_manipulate = (parentConnection, objSource) => {
-        let { 
+        let {
             left,
             modifier,
             value,
-         } = objSource['$d_manipulate'];
+        } = objSource['$d_manipulate'];
         let newBlock = workspace.newBlock('d_manipulate', true);
         newBlock.initSvg();
 
@@ -192,6 +192,40 @@ let populate = (workspace, parseObj) => {
         parseObj(
             newBlock.getInput('value').connection
             , value);
+
+        let newBlockOutput = newBlock.outputConnection;
+        newBlockOutput.connect(parentConnection);
+    };
+    let s_join = (parentConnection, objSource) => {
+        let { content, delimiter } = objSource['$s_join'];
+        let newBlock = workspace.newBlock('s_join', true);
+        newBlock.initSvg();
+        newBlock.render();
+
+        let index = 0;
+        for (let eachClause of content) {
+            if (index > 1) {
+                newBlock.addClause_.bind(newBlock)();
+            }
+            parseObj(
+                newBlock.getInput(`clause${index}`).connection,
+                eachClause
+            );
+            index++;
+        }
+        newBlock.setFieldValue(delimiter, "delimiter");
+
+        let newBlockOutput = newBlock.outputConnection;
+        newBlockOutput.connect(parentConnection);
+    };
+    let var_length = (parentConnection, objSource) => {
+        let source = objSource['$var_length'];
+        let newBlock = workspace.newBlock('var_length', true);
+        newBlock.initSvg();
+
+        parseObj(
+            newBlock.getInput('source').connection
+            , source);
 
         let newBlockOutput = newBlock.outputConnection;
         newBlockOutput.connect(parentConnection);
@@ -210,7 +244,9 @@ let populate = (workspace, parseObj) => {
         s_op_one,
         s_op_two,
         s_op_three,
-        d_manipulate
+        s_join,
+        d_manipulate,
+        var_length
     };
 };
 

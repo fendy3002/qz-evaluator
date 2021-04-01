@@ -119,7 +119,7 @@ const blockly = (elem, option?: any) => {
             <field name="modifier">days</field>
         </block>
         <block type="array_handle"></block>
-        <block type="array_length"></block>
+        <block type="var_length"></block>
         `;
 
     // let logic = `

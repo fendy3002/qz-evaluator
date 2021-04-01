@@ -114,6 +114,27 @@ let populate = (processBlock) => {
             },
         };
     };
+    let s_join = (block) => {
+        let length = block.clauseCount_;
+        let result = [];
+        for (let index = 0; index < length; index++) {
+            let source = block.getInputTargetBlock('clause' + index);
+            if (source) {
+                let value = processBlock(source);
+                if (value !== null) {
+                    result.push(value);
+                }
+            }
+            else {
+            }
+        }
+        return {
+            $s_join: {
+                delimiter: block.getFieldValue('delimiter'),
+                content: result
+            }
+        };
+    };
     let m_sum = (block) => {
         let length = block.clauseCount_;
         let result = [];
@@ -137,9 +158,17 @@ let populate = (processBlock) => {
         let modifier = block.getFieldValue('modifier');
         let value = block.getInputTargetBlock('value');
         return {
-            left: left,
-            modifier: modifier,
-            value: value,
+            $d_manipulate: {
+                left: processBlock(left),
+                modifier: modifier,
+                value: processBlock(value),
+            }
+        };
+    };
+    let var_length = (block) => {
+        let source = block.getInputTargetBlock('source');
+        return {
+            $var_length: processBlock(source)
         };
     };
 
@@ -154,9 +183,11 @@ let populate = (processBlock) => {
         s_op_one,
         s_op_two,
         s_op_three,
+        s_join,
         s_two,
         m_sum,
-        d_manipulate
+        d_manipulate,
+        var_length
     };
 };
 

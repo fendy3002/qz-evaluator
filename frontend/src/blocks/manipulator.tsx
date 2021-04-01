@@ -6,7 +6,8 @@ let color = {
     converter: 230,
     math: 250,
     string: 270,
-    date: 290
+    date: 290,
+    manipulator: 310
 };
 
 let c_number = {
@@ -284,7 +285,7 @@ let d_manipulate = {
             .setCheck(['date']);
 
         this.appendDummyInput()
-            .appendField(' add (');
+            .appendField('.add (');
 
         this.appendValueInput('value')
             .setCheck(['number']);
@@ -298,6 +299,18 @@ let d_manipulate = {
             ]), 'modifier');
         this.appendDummyInput()
             .appendField(')');
+    }
+};
+let var_length = {
+    init: function () {
+        this.setColour(color.manipulator);
+        this.setOutput(true, "number");
+        this.setInputsInline(true);
+
+        this.appendValueInput('source')
+            .setCheck(["string", "array"]);
+        this.appendDummyInput()
+            .appendField(".length");
     }
 };
 
@@ -316,4 +329,5 @@ export {
     s_op_three,
     s_join,
     d_manipulate,
+    var_length
 };
