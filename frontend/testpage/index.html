@@ -32,7 +32,17 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body pb-0">
+            <div class="card-body pt-2">
+                <div class="row">
+                    <div class="col">
+                        Provide the data to be evaluated below:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <textarea id="evaluated_data" class="form-control" rows="20"></textarea>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -46,9 +56,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <textarea class="form-control rounded-0" 
-                        style="font-family: 'Courier New', Courier, monospace; font-size: 0.8rem;"
-                        readonly id="getJSONText" rows="15"></textarea>
+                    <textarea class="form-control rounded-0"
+                        style="font-family: 'Courier New', Courier, monospace; font-size: 0.8rem;" readonly
+                        id="getJSONText" rows="15"></textarea>
                 </div>
             </div>
         </div>
@@ -71,12 +81,52 @@
     <script type="text/javascript" src="../public/js/bin/qz_evaluator.js"></script>
     <script type="text/javascript" src="../public/js/bin/qz_evaluator_dom.js"></script>
     <script>
+        let context = {
+            compareDataEditor: null
+        };
         let block = QzEvaluatorDom.blockly(document.getElementById('evaluator'), {
             autosave: true,
             readonly: false,
             evalMode: ""
         });
         block.load();
+        if (
+            !block.getValue() ||
+            Object.keys(block.getValue()).length == 0
+        ) {
+            block.parseJson(
+                { "$compare": { "source": { "$prop_date": "Birth" }, "operation": "lt", "compare": { "$date": "2005-01-01" } } }
+            );
+        }
+
+        let initEvaluatedData = () => {
+            let _data = localStorage.getItem('_data_');
+            if (!_data) {
+                let defaultData = {
+                    "FirstName": "Brad",
+                    "LastName": "Gibson",
+                    "Birth": "1993-07-20",
+                    "Rank": 3
+                };
+                $("#evaluated_data").html(JSON.stringify(defaultData, null, 4));
+            } else {
+                $("#evaluated_data").html(_data);
+            }
+            context.compareDataEditor = CodeMirror.fromTextArea(document.getElementById("evaluated_data"), {
+                lineNumbers: true,
+                mode: "javascript",
+            });
+            let changeHandle = null;
+            context.compareDataEditor.on("change", () => {
+                if (!changeHandle) {
+                    setTimeout(() => {
+                        localStorage.setItem('_data_', context.compareDataEditor.getValue());
+                        changeHandle = null;
+                    }, 500);
+                }
+            });
+        };
+        initEvaluatedData();
 
         $("#getJSON").on("click", () => {
             $("#getJSONText").html(
