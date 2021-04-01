@@ -66,6 +66,11 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
     let and = (data, obj) => {
         for (let condition of obj["$and"]) {
             let conditionEvaluation = processLogicBlock(data, condition);
+            if (Array.isArray(conditionEvaluation)) {
+                if (conditionEvaluation.filter(k => k === false).length > 0) {
+                    return false;
+                }
+            }
             if (!conditionEvaluation) {
                 return false;
             }
@@ -75,6 +80,11 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
     let or = (data, obj) => {
         for (let condition of obj["$or"]) {
             let conditionEvaluation = processLogicBlock(data, condition);
+            if (Array.isArray(conditionEvaluation)) {
+                if (conditionEvaluation.filter(k => k === true).length > 0) {
+                    return true;
+                }
+            }
             if (conditionEvaluation) {
                 return true;
             }
