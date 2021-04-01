@@ -12,23 +12,61 @@
 <body>
     <div class="container">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body pb-0">
                 <h1 class="card-title">QzEvaluator Playground</h1>
             </div>
-            <div class="card-body">
-                <div id="evaluator" style="height:600px;"></div>
+            <div class="card-body pb-0">
+                <div class="row">
+                    <div class="col">
+                        Compose the evaluation logic here:
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col">
+                        <div id="evaluator" style="height:600px;"></div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary rounded-0" id="getJSON">Get JSON</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pb-0">
+
+            </div>
+        </div>
+    </div>
+    <div id="getJSONModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control rounded-0" 
+                        style="font-family: 'Courier New', Courier, monospace; font-size: 0.8rem;"
+                        readonly id="getJSONText" rows="15"></textarea>
+                </div>
             </div>
         </div>
     </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.13.1/js-yaml.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/yaml/yaml.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/yaml/yaml.min.js"></script>
 
     <script type="text/javascript" src="../public/js/bin/qz_evaluator.js"></script>
     <script type="text/javascript" src="../public/js/bin/qz_evaluator_dom.js"></script>
@@ -39,7 +77,16 @@
             evalMode: ""
         });
         block.load();
-        console.log(QzEvaluator)
+
+        $("#getJSON").on("click", () => {
+            $("#getJSONText").html(
+                JSON.stringify(block.getValue(), null, 2)
+            );
+            $("#getJSONModal").modal({});
+        });
+        const evaluate = () => {
+
+        };
     </script>
 </body>
 
