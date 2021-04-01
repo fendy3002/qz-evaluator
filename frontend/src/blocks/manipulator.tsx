@@ -213,7 +213,6 @@ let s_op_two = {
                 ['LEFT', "left"],
                 ['RIGHT', "right"],
                 ['CHAR AT', "char_at"],
-                ['CHAR AT', "chart_at"],
             ]), 'operation')
             .appendField(' ("');
         this.appendValueInput('left')
