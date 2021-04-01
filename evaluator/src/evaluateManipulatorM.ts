@@ -20,6 +20,9 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
             "multiply": () => leftValue * rightValue,
             "mod": () => leftValue % rightValue,
         };
+        if (!map[operation]) {
+            throw new Error(`Operation ${operation} isn't supported`)
+        }
         return map[operation]();
     };
     let m_op_one = (data, obj) => {
@@ -37,6 +40,9 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
             root: () => Math.sqrt(leftValue),
             log: () => Math.log(leftValue),
         };
+        if (!map[operation]) {
+            throw new Error(`Operation ${operation} isn't supported`)
+        }
         return map[operation]();
     };
     let m_op_two = (data, obj) => {
@@ -54,6 +60,9 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
             root: () => Math.pow(leftValue, 1 / rightValue),
             log: () => Math.log(leftValue) / Math.log(rightValue)
         };
+        if (!map[operation]) {
+            throw new Error(`Operation ${operation} isn't supported`)
+        }
         return map[operation]();
     };
     let m_sum = (data, obj) => {
