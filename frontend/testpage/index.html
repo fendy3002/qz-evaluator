@@ -30,9 +30,9 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/yaml/yaml.min.js"></script>
 
-    <script type="text/javascript" src="../public/js/bin/qz_evaluator.js"></script>
+    <script type="text/javascript" src="../public/js/bin/qz_evaluator_dom.js"></script>
     <script>
-        let block = QzEvaluator.blockly(document.getElementById('evaluator'), {
+        let block = QzEvaluatorDom.blockly(document.getElementById('evaluator'), {
             autosave: true,
             readonly: false,
             evalMode: ""

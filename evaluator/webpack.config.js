@@ -1,19 +1,11 @@
 const path = require('path');
 const sourceCodes = [{
     entry: {
-        "qz_evaluator_dom": path.resolve(__dirname, "src/index.tsx"),
+        "qz_evaluator": path.resolve(__dirname, "src/index.tsx"),
     },
     output: {
-        path: path.resolve(__dirname, 'public/js/bin'),
-        library: 'QzEvaluatorDom',
-        filename: "[name].js",
-    }
-}, {
-    entry: {
-        "index": path.resolve(__dirname, "src/index.tsx"),
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, '../frontend/public/js/bin'),
+        library: 'QzEvaluator',
         filename: "[name].js",
     }
 }];
