@@ -6,11 +6,10 @@ let compare = {
     init: function () {
         this.setColour(210);
         this.setOutput(true, ["boolean"]);
-        this.setInputsInline(false);
+        this.setInputsInline(true);
 
         this.appendValueInput('source')
             .setAlign(Blockly.ALIGN_CENTRE)
-            .appendField("compare")
             .setCheck(['number', 'date', 'string', 'boolean']);
 
         this.appendDummyInput()
