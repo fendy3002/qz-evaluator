@@ -2,10 +2,21 @@ import * as comparer from './comparer';
 import * as manipulator from './manipulator';
 
 let parse = (workspace, objSource) => {
-    workspace.clear();
-
-    let evaluatorBlock = workspace.newBlock('evaluator');
-    evaluatorBlock.initSvg();
+    let top_blocks = workspace.getTopBlocks(false);
+    let evaluatorBlock = null;
+    for (let i in top_blocks) {
+        let top_block = top_blocks[i];
+        if (top_block.type == 'evaluator') {
+            evaluatorBlock = top_block;
+            let connectedBlock = top_block.getInputTargetBlock('json');
+            if (connectedBlock) {
+                connectedBlock.dispose(false);
+            }
+        }
+        else {
+            top_block.dispose(false);
+        }
+    }
     parser(workspace).obj(evaluatorBlock.getInput("json").connection, objSource);
     workspace.render();
 };

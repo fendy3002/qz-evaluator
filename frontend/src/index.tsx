@@ -122,8 +122,6 @@ const blockly = (elem, option?: any) => {
     //     <block type="evaluator"></block>
     // `;
     let toolbox = (window as any).$(`<xml id="toolbox" style="display: none">
-        <category name="Misc" colour="290">
-        </category>
         <category name="Properties" colour="20">
             ${properties}
         </category>
