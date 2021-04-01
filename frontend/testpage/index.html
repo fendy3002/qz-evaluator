@@ -38,12 +38,23 @@
                         Provide the data to be evaluated below:
                     </div>
                 </div>
-                <div class="row">
+                <div class="row form-group">
                     <div class="col">
                         <textarea id="evaluated_data" class="form-control" rows="20"></textarea>
                     </div>
                 </div>
-
+                <div class="row form-group">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary rounded-0" id="btnEvaluate">Evaluate</button>
+                    </div>
+                </div>
+                <div class="row pb-4">
+                    <div class="col pl-4 pr-4">
+                        <div id="resultSpan" 
+                        class="pl-2 pr-2"
+                        style="background-color: #DDDDDD; min-height: 24px;"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -134,8 +145,14 @@
             );
             $("#getJSONModal").modal({});
         });
-        const evaluate = () => {
+        $("#btnEvaluate").on("click", () => {
+            $("#resultSpan").html(evaluate());
+        });
 
+        const evaluate = () => {
+            let data = JSON.parse(context.compareDataEditor.getValue());
+            let result = QzEvaluator.fromJSON(block.getValue()).evaluate(data);
+            return result;
         };
     </script>
 </body>
