@@ -96,10 +96,40 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
         return processLogicBlock(data, elseValue);
     };
 
+    let betweenRaw = (operation) => {
+        return (data, obj) => {
+            let {
+                source,
+                min,
+                max
+            } = obj["$" + operation];
+
+            let logic = (k, l, m) => k <= l && l <= m;
+            if (operation == "between_ex") {
+                logic = (k, l, m) => k < l && l < m;
+            }
+
+            let minValue = processLogicBlock(data, min);
+            let sourceValue = processLogicBlock(data, source);
+            let maxValue = processLogicBlock(data, max);
+
+            if (sourceValue instanceof Date) {
+                let minCompare = moment(sourceValue).diff(moment(minValue), "seconds");
+                let maxCompare = moment(minValue).diff(moment(sourceValue), "seconds");
+                return logic(minCompare, 0, maxCompare);
+            }
+            else {
+                return logic(minValue, sourceValue, maxValue);
+            }
+        }
+    }
+
     return {
         compare,
         and,
         or,
-        ifs
+        ifs,
+        between: betweenRaw("between"),
+        between_ex: betweenRaw("between_ex"),
     };
 };
