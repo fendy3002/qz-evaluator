@@ -28,9 +28,9 @@ let populate = (processBlock) => {
         let handler = block.getInputTargetBlock('handler');
         return {
             $array_handle: {
-                left: processBlock(source),
+                source: processBlock(source),
                 operation: operation,
-                right: processBlock(handler)
+                handler: processBlock(handler)
             },
         };
     };
