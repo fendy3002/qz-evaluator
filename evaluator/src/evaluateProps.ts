@@ -14,7 +14,9 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
         return obj["$boolean"];
     };
     let _array = (data, obj) => {
-        return obj["$array"];
+        return obj["$array"].map(each => {
+            return processLogicBlock(data, each);
+        });
     };
     let date = (data, obj) => {
         let value = obj["$date"];

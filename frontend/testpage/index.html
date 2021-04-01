@@ -124,7 +124,13 @@
                     "FirstName": "Brad",
                     "LastName": "Gibson",
                     "Birth": "1993-07-20",
-                    "Rank": 3
+                    "Rank": 3,
+                    "Sales": [
+                        {"Month": 0, "Value": 1000},
+                        {"Month": 1, "Value": 1500},
+                        {"Month": 2, "Value": 2000},
+                        {"Month": 3, "Value": 3000}
+                    ]
                 };
                 $("#evaluated_data").html(JSON.stringify(defaultData, null, 4));
             } else {

@@ -6,17 +6,19 @@ import * as types from './types';
 export default (processLogicBlock: types.ProcessLogicBlock) => {
     let array_handle = (data, obj) => {
         let { source, operation, handler } = obj["$array_handle"];
+        let sourceValue = processLogicBlock(data, source);
         let operationMap = {
-            map: (source, handler) => source.map(handler),
-            filter: (source, handler) => source.filter(handler),
-            any: (source, handler) => {
-                if (handler) {
-                    return source.some(handler);
+            map: (sourceValue, handler) => sourceValue.map(each => processLogicBlock({ each, data }, handler)),
+            filter: (sourceValue, handler) => sourceValue.filter(each => processLogicBlock({ each, data }, handler)),
+            any: (sourceValue, handlerValue) => {
+                if (handlerValue) {
+                    return sourceValue.some(each => processLogicBlock({ each, data }, handler));
                 } else {
-                    return source.length > 0;
+                    return sourceValue.length > 0;
                 }
             },
         }
+        return operationMap[operation](sourceValue, handler)
     };
     let var_length = (data, obj) => {
         let value = processLogicBlock(data, obj["$var_length"]);
