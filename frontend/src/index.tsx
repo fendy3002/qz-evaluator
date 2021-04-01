@@ -3,6 +3,8 @@ import * as mutator from './mutator';
 import * as blocks from './blocks';
 import * as jsonify from './jsonify';
 import * as parse from './parse';
+import * as jsYaml from 'js-yaml';
+
 let lo = require('lodash');
 
 export enum EvalMode {
@@ -184,16 +186,17 @@ const blockly = (elem, option?: any) => {
 
     let getValue = () => {
         return jsonify.jsonify(ws);
-        // let currentText = Blockly.logical_compare.toText(Blockly.getMainWorkspace());
-        // if (!currentText) {
-        //     return null;
-        // }
-        // return JSON.parse(currentText);
+    };
+    let getYaml = () => {
+        return jsYaml.dump(getValue());
     };
 
     let parseJson = (jsonValue) => {
         parse.parse(ws, jsonValue);
         // Blockly.logical_compare.parseText(JSON.stringify(jsonValue), Blockly.getMainWorkspace());
+    };
+    let parseYaml = (yamlString) => {
+        parseJson(jsYaml.load(yamlString))
     };
     let id = elem.id ?? "";
     let save = () => {
@@ -208,8 +211,10 @@ const blockly = (elem, option?: any) => {
     return {
         hide,
         show,
+        parseYaml,
         parseJson,
         getValue,
+        getYaml,
         save,
         load
     };

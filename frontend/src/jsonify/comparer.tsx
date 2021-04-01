@@ -71,7 +71,7 @@ let populate = (processBlock) => {
         return {
             $ifs: {
                 cases: cases,
-                elseValue: processBlock(elseInput)
+                else_value: processBlock(elseInput)
             }
         };
     }

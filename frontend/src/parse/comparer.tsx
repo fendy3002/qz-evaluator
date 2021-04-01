@@ -41,7 +41,7 @@ let populate = (workspace, parseObj) => {
     }
 
     let ifs = (parentConnection, objSource) => {
-        let { cases, elseValue } = objSource['$ifs'];
+        let { cases, else_value } = objSource['$ifs'];
         let newBlock = workspace.newBlock('ifs', true);
         newBlock.initSvg();
         newBlock.render(); // don't know why need to render first
@@ -65,7 +65,7 @@ let populate = (workspace, parseObj) => {
         }
 
         let valueElseInput = newBlock.getInput('value_else');
-        parseObj(valueElseInput.connection, elseValue);
+        parseObj(valueElseInput.connection, else_value);
         let newBlockOutput = newBlock.outputConnection;
         newBlockOutput.connect(parentConnection);
     };

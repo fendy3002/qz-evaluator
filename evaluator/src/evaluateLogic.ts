@@ -84,7 +84,7 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
     let ifs = (data, obj) => {
         let {
             cases,
-            elseValue
+            else_value
         } = obj["$ifs"];
 
         for (let eachCase of cases) {
@@ -93,7 +93,7 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
                 return processLogicBlock(data, eachCase.value);
             }
         }
-        return processLogicBlock(data, elseValue);
+        return processLogicBlock(data, else_value);
     };
 
     let betweenRaw = (operation) => {
