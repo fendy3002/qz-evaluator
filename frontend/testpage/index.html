@@ -29,6 +29,13 @@
                 </div>
                 <div class="row form-group">
                     <div class="col">
+                        <button type="button" class="btn btn-danger rounded-0" id="btnClear">Clear</button>
+                        <button type="button" class="btn btn-secondary rounded-0" id="setJSON">Parse JSON</button>
+                        <button type="button" class="btn btn-secondary rounded-0" id="setYAML">Parse YAML</button>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col">
                         <div id="evaluator" style="height:600px;"></div>
                     </div>
                 </div>
@@ -77,6 +84,40 @@
                     <textarea class="form-control rounded-0"
                         style="font-family: 'Courier New', Courier, monospace; font-size: 0.8rem;" readonly
                         id="getTextInput" rows="15"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="setTextModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="container-fluid text-right">
+                        <button type="button" class="btn btn-sm btn-danger rounded-0" data-dismiss="modal"
+                            aria-label="Close">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-sm btn-primary rounded-0" data-role="parse">
+                            Parse
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="mode" value="json" />
+                    <textarea class="form-control rounded-0"
+                        style="font-family: 'Courier New', Courier, monospace; font-size: 0.8rem;" id="setTextInput"
+                        rows="15"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <div class="container-fluid text-right">
+                        <button type="button" class="btn btn-sm btn-danger rounded-0" data-dismiss="modal"
+                            aria-label="Close">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-sm btn-primary rounded-0" data-role="parse">
+                            Parse
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,19 +206,50 @@
         initEvaluatedData();
 
         $("#getJSON").on("click", () => {
-            $("#getTextInput").html(
+            $("#getTextInput").val(
                 JSON.stringify(block.getValue(), null, 2)
             );
             $("#getTextModal").modal({});
         });
         $("#getYAML").on("click", () => {
-            $("#getTextInput").html(
+            $("#getTextInput").val(
                 block.getYaml()
             );
             $("#getTextModal").modal({});
         });
+
+        $("#setJSON").on("click", () => {
+            $("#setTextInput").val("{}");
+            $("#setTextModal [name='mode']").val("json");
+            $("#setTextModal").modal({
+                backdrop: 'static'
+            });
+        });
+        $("#setYAML").on("click", () => {
+            $("#setTextInput").val("");
+            $("#setTextModal [name='mode']").val("yaml");
+            $("#setTextModal").modal({
+                backdrop: 'static'
+            });
+        });
+        $("#setTextModal [data-role='parse']").on("click", (evt) => {
+            let mode = $("#setTextModal [name='mode']").val();
+            if (mode == "json") {
+                block.parseJson(JSON.parse(
+                    $("#setTextInput").val()
+                ));
+            } else {
+                block.parseYaml(
+                    $("#setTextInput").val()
+                );
+            }
+            $("#setTextModal").modal('hide');
+        });
         $("#btnEvaluate").on("click", () => {
             $("#resultSpan").html(evaluate());
+        });
+        $("#btnClear").on("click", () => {
+            block.parseJson({});
         });
 
         const evaluate = () => {
