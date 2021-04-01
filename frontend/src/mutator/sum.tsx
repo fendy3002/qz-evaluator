@@ -81,7 +81,7 @@ const mutator = {
         // Because else-if inputs are 1-indexed we increment first, decrement last.
         this.appendValueInput('clause' + this.clauseCount_)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .setCheck(['number'])
+            .setCheck(['number', 'array'])
             .appendField(
                 createMinusField(this.clauseCount_), 'MINUS' + this.clauseCount_);
         this.clauseCount_++;

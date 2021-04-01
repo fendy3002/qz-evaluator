@@ -54,6 +54,9 @@ const blockly = (elem, option?: any) => {
         <block type="date">
             <field name="string_value">NOW</field>
         </block>
+
+        <block type="array"></block>
+        <block type="prop_array"></block>
         `;
 
     let logic = `
@@ -104,6 +107,9 @@ const blockly = (elem, option?: any) => {
                 </block>
             </value>
         </block>
+        <block type="s_join">
+            <field name="delimiter">&#160;</field>
+        </block>
         <block type="d_manipulate">
             <value name="value">
                 <block type="number">
@@ -112,6 +118,8 @@ const blockly = (elem, option?: any) => {
             </value>
             <field name="modifier">days</field>
         </block>
+        <block type="array_handle"></block>
+        <block type="array_length"></block>
         `;
 
     // let logic = `

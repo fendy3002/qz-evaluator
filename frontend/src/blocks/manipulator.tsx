@@ -7,7 +7,7 @@ let color = {
     math: 250,
     string: 270,
     date: 290
-}
+};
 
 let c_number = {
     init: function () {
@@ -149,10 +149,10 @@ let m_sum = {
             .appendField("sum");
 
         this.appendValueInput('clause0')
-            .setCheck('number')
+            .setCheck(['number', 'array'])
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput('clause1')
-            .setCheck('number')
+            .setCheck(['number', 'array'])
             .setAlign(Blockly.ALIGN_RIGHT);
 
         this.jsonInit({ "mutator": "sum_mutator" });
@@ -251,6 +251,29 @@ let s_op_three = {
             .appendField(')');
     }
 };
+let s_join = {
+    init: function () {
+        this.setColour(color.string);
+        this.setOutput(true, ["string"]);
+        this.setInputsInline(false);
+
+        // this.appendStatementInput('EVAL')
+        //     .appendField('and');
+        this.appendDummyInput()
+            .appendField(createPlusField(), "PLUS")
+            .appendField("concat with delimiter ")
+            .appendField(new Blockly.FieldTextInput(''), 'delimiter');
+
+        this.appendValueInput('clause0')
+            .setCheck(['string', "array"])
+            .setAlign(Blockly.ALIGN_RIGHT);
+        this.appendValueInput('clause1')
+            .setCheck(['string', "array"])
+            .setAlign(Blockly.ALIGN_RIGHT);
+
+        this.jsonInit({ "mutator": "s_join_mutator" });
+    }
+};
 let d_manipulate = {
     init: function () {
         this.setColour(color.string);
@@ -291,5 +314,6 @@ export {
     s_op_one,
     s_op_two,
     s_op_three,
+    s_join,
     d_manipulate,
 };

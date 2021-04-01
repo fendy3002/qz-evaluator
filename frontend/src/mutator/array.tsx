@@ -1,7 +1,7 @@
 import Blockly from 'blockly/core';
 import { createMinusField } from '../fields/minus';
 
-const andOrMutator = {
+const mutator = {
     // TODO: This should be its own extension. But that requires core changes.
     suppressPrefixSuffix: true,
 
@@ -78,10 +78,12 @@ const andOrMutator = {
      * @private
      */
     addClause_: function () {
+        let supportedType = ['number', 'string', 'boolean', 'date'];
+
         // Because else-if inputs are 1-indexed we increment first, decrement last.
-        this.appendValueInput('clause' + this.clauseCount_)
+        this.appendValueInput('elem' + this.clauseCount_)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .setCheck(['boolean', 'array'])
+            .setCheck(supportedType)
             .appendField(
                 createMinusField(this.clauseCount_), 'MINUS' + this.clauseCount_);
         this.clauseCount_++;
@@ -123,7 +125,7 @@ const andOrMutator = {
             }
         }
 
-        this.removeInput('clause' + (this.clauseCount_ - 1));
+        this.removeInput('elem' + (this.clauseCount_ - 1));
         // Because else-if inputs are 1-indexed we increment first, decrement last.
         this.clauseCount_--;
     },
@@ -133,10 +135,10 @@ const andOrMutator = {
  * Adds the initial plus button to the if block.
  * @this Blockly.Block
  */
-const andOrHelper = function () {
+const arrayHelper = function () {
     // this.getInput('clause0').insertFieldAt(0, createPlusField(), 'PLUS');
 };
 
 export const register = (registerMutator) => {
-    registerMutator('and_or_mutator', andOrMutator, andOrHelper);
+    registerMutator('array_mutator', mutator, arrayHelper);
 };

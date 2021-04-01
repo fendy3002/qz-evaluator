@@ -88,10 +88,10 @@ let and = {
             .appendField("and");
 
         this.appendValueInput('clause0')
-            .setCheck('boolean')
+            .setCheck(['boolean', 'array'])
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput('clause1')
-            .setCheck('boolean')
+            .setCheck(['boolean', 'array'])
             .setAlign(Blockly.ALIGN_RIGHT);
 
         // this.setMutator(new Blockly.Mutator(['my_block_A', 'my_block_B']));
@@ -110,10 +110,10 @@ let or = {
             .appendField("or");
 
         this.appendValueInput('clause0')
-            .setCheck('boolean')
+            .setCheck(['boolean', 'array'])
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput('clause1')
-            .setCheck('boolean')
+            .setCheck(['boolean', 'array'])
             .setAlign(Blockly.ALIGN_RIGHT);
 
         // this.setMutator(new Blockly.Mutator(['my_block_A', 'my_block_B']));

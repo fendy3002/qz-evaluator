@@ -1,6 +1,7 @@
 import * as Blockly from 'blockly';
 import * as comparer from './comparer';
 import * as manipulator from './manipulator';
+import * as array from './array';
 
 let populate = (option) => {
     let evaluator = {
@@ -139,6 +140,7 @@ let populate = (option) => {
         prop_date,
         ...comparer,
         ...manipulator,
+        ...array
     };
 }
 
