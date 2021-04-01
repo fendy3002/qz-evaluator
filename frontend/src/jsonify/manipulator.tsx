@@ -66,6 +66,18 @@ let populate = (processBlock) => {
             },
         };
     };
+
+    let s_two = (block) => {
+        let left = block.getInputTargetBlock('left');
+        let right = block.getInputTargetBlock('right');
+        return {
+            $s_two: {
+                left: processBlock(left),
+                operation: "concat",
+                right: processBlock(right)
+            },
+        };
+    };
     let s_op_one = (block) => {
         let left = block.getInputTargetBlock('left');
         let operation = block.getFieldValue('operation');
@@ -142,6 +154,7 @@ let populate = (processBlock) => {
         s_op_one,
         s_op_two,
         s_op_three,
+        s_two,
         m_sum,
         d_manipulate
     };

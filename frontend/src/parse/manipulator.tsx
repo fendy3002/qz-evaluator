@@ -47,44 +47,14 @@ let populate = (workspace, parseObj) => {
         newBlockOutput.connect(parentConnection);
     };
 
-    let m_two = (parentConnection, objSource) => {
-        let { left, operation, right } = objSource['$m_two'];
-        let newBlock = workspace.newBlock('m_two', true);
+    let s_two = (parentConnection, objSource) => {
+        let { left, right } = objSource['$s_two'];
+        let newBlock = workspace.newBlock('s_two', true);
         newBlock.initSvg();
 
         parseObj(
             newBlock.getInput('left').connection
             , left);
-        newBlock.setFieldValue(operation, "operation");
-        parseObj(
-            newBlock.getInput('right').connection
-            , right);
-
-        let newBlockOutput = newBlock.outputConnection;
-        newBlockOutput.connect(parentConnection);
-    };
-    let m_op_one = (parentConnection, objSource) => {
-        let { left, operation } = objSource['$m_op_one'];
-        let newBlock = workspace.newBlock('m_op_one', true);
-        newBlock.initSvg();
-
-        parseObj(
-            newBlock.getInput('left').connection
-            , left);
-        newBlock.setFieldValue(operation, "operation");
-
-        let newBlockOutput = newBlock.outputConnection;
-        newBlockOutput.connect(parentConnection);
-    };
-    let m_op_two = (parentConnection, objSource) => {
-        let { left, operation, right } = objSource['$m_op_two'];
-        let newBlock = workspace.newBlock('m_op_two', true);
-        newBlock.initSvg();
-
-        parseObj(
-            newBlock.getInput('left').connection
-            , left);
-        newBlock.setFieldValue(operation, "operation");
         parseObj(
             newBlock.getInput('right').connection
             , right);
@@ -133,6 +103,51 @@ let populate = (workspace, parseObj) => {
         parseObj(
             newBlock.getInput('middle').connection
             , middle);
+        parseObj(
+            newBlock.getInput('right').connection
+            , right);
+
+        let newBlockOutput = newBlock.outputConnection;
+        newBlockOutput.connect(parentConnection);
+    };
+    let m_two = (parentConnection, objSource) => {
+        let { left, operation, right } = objSource['$m_two'];
+        let newBlock = workspace.newBlock('m_two', true);
+        newBlock.initSvg();
+
+        parseObj(
+            newBlock.getInput('left').connection
+            , left);
+        newBlock.setFieldValue(operation, "operation");
+        parseObj(
+            newBlock.getInput('right').connection
+            , right);
+
+        let newBlockOutput = newBlock.outputConnection;
+        newBlockOutput.connect(parentConnection);
+    };
+    let m_op_one = (parentConnection, objSource) => {
+        let { left, operation } = objSource['$m_op_one'];
+        let newBlock = workspace.newBlock('m_op_one', true);
+        newBlock.initSvg();
+
+        parseObj(
+            newBlock.getInput('left').connection
+            , left);
+        newBlock.setFieldValue(operation, "operation");
+
+        let newBlockOutput = newBlock.outputConnection;
+        newBlockOutput.connect(parentConnection);
+    };
+    let m_op_two = (parentConnection, objSource) => {
+        let { left, operation, right } = objSource['$m_op_two'];
+        let newBlock = workspace.newBlock('m_op_two', true);
+        newBlock.initSvg();
+
+        parseObj(
+            newBlock.getInput('left').connection
+            , left);
+        newBlock.setFieldValue(operation, "operation");
         parseObj(
             newBlock.getInput('right').connection
             , right);
@@ -191,6 +206,7 @@ let populate = (workspace, parseObj) => {
         m_op_one,
         m_op_two,
         m_sum,
+        s_two,
         s_op_one,
         s_op_two,
         s_op_three,
