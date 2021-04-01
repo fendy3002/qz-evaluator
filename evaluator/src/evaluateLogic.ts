@@ -75,16 +75,31 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
     let or = (data, obj) => {
         for (let condition of obj["$or"]) {
             let conditionEvaluation = processLogicBlock(data, condition);
-            if(conditionEvaluation){
+            if (conditionEvaluation) {
                 return true;
             }
         }
         return false;
     };
+    let ifs = (data, obj) => {
+        let {
+            cases,
+            elseValue
+        } = obj["$ifs"];
+
+        for (let eachCase of cases) {
+            let clauseEvaluation = processLogicBlock(data, eachCase.clause);
+            if (clauseEvaluation) {
+                return processLogicBlock(data, eachCase.value);
+            }
+        }
+        return processLogicBlock(data, elseValue);
+    };
 
     return {
         compare,
         and,
-        or
+        or,
+        ifs
     };
 };
