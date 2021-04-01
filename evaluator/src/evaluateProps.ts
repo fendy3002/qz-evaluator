@@ -13,6 +13,9 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
     let _boolean = (data, obj) => {
         return obj["$boolean"];
     };
+    let _array = (data, obj) => {
+        return obj["$array"];
+    };
     let date = (data, obj) => {
         let value = obj["$date"];
         return moment(value).toDate();
@@ -54,15 +57,25 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
             return moment(value).toDate();
         }
     };
+    let prop_array = (data, obj) => {
+        let value = lo.get(data, obj["$prop_array"]);
+        if (Array.isArray(value)) {
+            return value;
+        } else {
+            return [value];
+        }
+    };
 
     return {
         string: _string,
         number: _number,
         boolean: _boolean,
+        array: _array,
         date,
         prop_string,
         prop_number,
         prop_boolean,
-        prop_date
+        prop_date,
+        prop_array
     };
 };

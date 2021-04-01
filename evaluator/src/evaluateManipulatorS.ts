@@ -74,11 +74,29 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
         }
         return map[operation]();
     };
+    let s_join = (data, obj) => {
+        let {
+            delimiter,
+            content
+        } = obj["$s_join"];
+        let source = [];
+        for (let each of content) {
+            let eachValue = processLogicBlock(data, each);
+            if (Array.isArray(eachValue)) {
+                source = source.concat(eachValue);
+            }
+            else {
+                source.push(eachValue);
+            }
+        }
+        return source.join(delimiter);
+    };
 
     return {
         s_two,
         s_op_one,
         s_op_two,
         s_op_three,
+        s_join
     };
 };
