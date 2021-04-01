@@ -114,9 +114,11 @@ export default (processLogicBlock: types.ProcessLogicBlock) => {
             let maxValue = processLogicBlock(data, max);
 
             if (sourceValue instanceof Date) {
-                let minCompare = moment(sourceValue).diff(moment(minValue), "seconds");
-                let maxCompare = moment(minValue).diff(moment(sourceValue), "seconds");
-                return logic(minCompare, 0, maxCompare);
+                return logic(
+                    moment(minValue).valueOf(),
+                    moment(sourceValue).valueOf(),
+                    moment(maxValue).valueOf(),
+                );
             }
             else {
                 return logic(minValue, sourceValue, maxValue);
