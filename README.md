@@ -8,9 +8,7 @@ Logic block composer interface
 
 ## Installation and usage
 
-```shell
-
-```
+Download `index.min.js` from `frontend/dist/index.min.js`.
 
 Usage in browser:
 
