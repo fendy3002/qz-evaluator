@@ -1,11 +1,12 @@
 {
   "name": "@fendy3002/qz-evaluator",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
     "test": "mocha --config ./test/.mocharc.js 'test/**/*.spec.ts'",
-    "compile": "tsc && webpack --mode=development"
+    "compile": "tsc && webpack --mode=development",
+    "prepublish": "yarn compile"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
