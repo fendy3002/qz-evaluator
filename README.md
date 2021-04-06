@@ -2,6 +2,8 @@
 
 ![Evaluator DOM](./01_intro.jpg "Evaluator DOM")
 
+Compose logical blocks and evaluate data based on the logic composed. Try at [fendy3002.github.io/qz-evaluator/](https://fendy3002.github.io/qz-evaluator/).
+
 # DOM
 
 Logic block composer interface
