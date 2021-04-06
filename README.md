@@ -3,6 +3,8 @@
 
 # DOM
 
+Logic block composer interface
+
 ## Installation and usage
 
 ```shell
@@ -60,7 +62,7 @@ const evaluator = QzEvaluatorDom.render(
 );
 ```
 
-### blockObject.getValue
+### evaluator.getValue
 
 Get logic blocks as JSON
 
@@ -82,7 +84,7 @@ let logicBlock = evaluator.getValue();
 */
 ```
 
-### blockObject.getYAML
+### evaluator.getYAML
 
 Get logic blocks as YAML
 ```javascript
@@ -103,7 +105,7 @@ $prop_number: "myValue"
 */
 ```
 
-### blockObject.parseJSON
+### evaluator.parseJSON
 
 Parse logic block in JSON format
 ```javascript
@@ -121,7 +123,7 @@ Example:
 evaluator.parseJSON({ $prop_number: "myValue" });
 ```
 
-### blockObject.parseYAML
+### evaluator.parseYAML
 
 Parse logic block in YAML format
 ```javascript
@@ -140,6 +142,8 @@ evaluator.parseYAML(`$prop_number: "myValue"`);
 ```
 
 # Evaluator
+
+Data evaluator based on logic block composed from DOM
 
 ## Installation and usage
 
@@ -242,4 +246,33 @@ Example:
 
 ```javascript
 const evaluator = fromYAML(`$prop_number: "myValue"`)
+```
+
+### evaluator.evaluate
+
+Evaluate JSON data against pre-supplied logic block
+
+```javascript
+evaluator.evaluate(data);
+```
+
+Arguments:
+
+| argument        | type           | description                  |
+| --------------- | -------------- | ---------------------------- |
+| data            | JSON           | data to be evaluated against |
+
+Returns:
+
+```
+Evaluation result
+```
+
+Example:
+
+```javascript
+let data = {
+    "myValue": 9300
+};
+fromJSON({ $prop_number: "myValue" }).evaluate(data) // 9300
 ```
