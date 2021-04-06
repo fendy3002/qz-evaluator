@@ -153,7 +153,7 @@
             !evaluator.getValue() ||
             Object.keys(evaluator.getValue()).length == 0
         ) {
-            evaluator.parseJson({
+            evaluator.parseJSON({
                 "$m_sum": [
                     {
                         "$array_handle": {
@@ -213,7 +213,7 @@
         });
         $("#getYAML").on("click", () => {
             $("#getTextInput").val(
-                evaluator.getYaml()
+                evaluator.getYAML()
             );
             $("#getTextModal").modal({});
         });
@@ -235,11 +235,11 @@
         $("#setTextModal [data-role='parse']").on("click", (evt) => {
             let mode = $("#setTextModal [name='mode']").val();
             if (mode == "json") {
-                evaluator.parseJson(JSON.parse(
+                evaluator.parseJSON(JSON.parse(
                     $("#setTextInput").val()
                 ));
             } else {
-                evaluator.parseYaml(
+                evaluator.parseYAML(
                     $("#setTextInput").val()
                 );
             }
@@ -249,7 +249,7 @@
             $("#resultSpan").html(evaluate());
         });
         $("#btnClear").on("click", () => {
-            evaluator.parseJson({});
+            evaluator.parseJSON({});
         });
 
         const evaluate = () => {

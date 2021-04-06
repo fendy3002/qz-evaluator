@@ -82,11 +82,11 @@ let logicBlock = evaluator.getValue();
 */
 ```
 
-### blockObject.getYaml
+### blockObject.getYAML
 
 Get logic blocks as YAML
 ```javascript
-evaluator.getYaml();
+evaluator.getYAML();
 ```
 
 Returns:
@@ -97,17 +97,17 @@ Logic block in YAML format
 
 Example:
 ```javascript
-let logicBlock = evaluator.getYaml();
+let logicBlock = evaluator.getYAML();
 /*
 $prop_number: "myValue"
 */
 ```
 
-### blockObject.parseJson
+### blockObject.parseJSON
 
 Parse logic block in JSON format
 ```javascript
-evaluator.parseJson(json);
+evaluator.parseJSON(json);
 ```
 
 Arguments:
@@ -118,14 +118,14 @@ Arguments:
 
 Example:
 ```javascript
-evaluator.parseJson({ $prop_number: "myValue" });
+evaluator.parseJSON({ $prop_number: "myValue" });
 ```
 
-### blockObject.parseYaml
+### blockObject.parseYAML
 
 Parse logic block in YAML format
 ```javascript
-evaluator.parseYaml(yaml);
+evaluator.parseYAML(yaml);
 ```
 
 Arguments:
@@ -136,7 +136,7 @@ Arguments:
 
 Example:
 ```javascript
-evaluator.parseYaml(`$prop_number: "myValue"`);
+evaluator.parseYAML(`$prop_number: "myValue"`);
 ```
 
 # Evaluator
@@ -188,4 +188,58 @@ let data = {
 };
 
 let evaluationResult = fromJSON(logiBlock).evaluate(data); // 7500
+```
+
+## API
+
+### fromJSON
+
+Create evaluator from JSON logic block
+
+```javascript
+fromJSON(logicBlockJSON);
+```
+
+Arguments:
+
+| argument        | type  | description                |
+| --------------- | ------| -------------------------- |
+| logicBlockJSON  | JSON  | Logic block in JSON format |
+
+Returns:
+
+```
+QzEvaluator object
+```
+
+Example:
+
+```javascript
+const evaluator = fromJSON({ $prop_number: "myValue" })
+```
+
+### fromYAML
+
+Create evaluator from YAML logic block
+
+```javascript
+fromYAML(logicBlockYAML);
+```
+
+Arguments:
+
+| argument        | type           | description                |
+| --------------- | -------------- | -------------------------- |
+| logicBlockYAML  | string (YAML)  | Logic block in YAML format |
+
+Returns:
+
+```
+QzEvaluator object
+```
+
+Example:
+
+```javascript
+const evaluator = fromYAML(`$prop_number: "myValue"`)
 ```

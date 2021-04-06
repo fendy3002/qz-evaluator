@@ -219,10 +219,10 @@ const render = (elem, option?: any) => {
     return {
         hide,
         show,
-        parseYaml,
-        parseJson,
+        parseYAML: parseYaml,
+        parseJSON: parseJson,
         getValue,
-        getYaml,
+        getYAML: getYaml,
         save,
         load
     };
