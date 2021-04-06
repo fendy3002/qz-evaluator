@@ -26,10 +26,10 @@ const blockly = (elem, option?: any) => {
     }, option);
 
     let hide = () => {
-        elem.classList.add("d-none");
+        elem.style.visibility = "hidden";
     };
     let show = () => {
-        elem.classList.remove("d-none");
+        elem.style.visibility = "visible";
     };
 
     mutator.register(Blockly.Extensions.registerMutator);
