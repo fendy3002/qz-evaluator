@@ -143,17 +143,17 @@
         let context = {
             compareDataEditor: null
         };
-        let block = QzEvaluatorDom.blockly(document.getElementById('evaluator'), {
+        let evaluator = QzEvaluatorDom.render(document.getElementById('evaluator'), {
             autosave: true,
             readonly: false,
             evalMode: ""
         });
-        block.load();
+        evaluator.load();
         if (
-            !block.getValue() ||
-            Object.keys(block.getValue()).length == 0
+            !evaluator.getValue() ||
+            Object.keys(evaluator.getValue()).length == 0
         ) {
-            block.parseJson({
+            evaluator.parseJson({
                 "$m_sum": [
                     {
                         "$array_handle": {
@@ -207,13 +207,13 @@
 
         $("#getJSON").on("click", () => {
             $("#getTextInput").val(
-                JSON.stringify(block.getValue(), null, 2)
+                JSON.stringify(evaluator.getValue(), null, 2)
             );
             $("#getTextModal").modal({});
         });
         $("#getYAML").on("click", () => {
             $("#getTextInput").val(
-                block.getYaml()
+                evaluator.getYaml()
             );
             $("#getTextModal").modal({});
         });
@@ -235,11 +235,11 @@
         $("#setTextModal [data-role='parse']").on("click", (evt) => {
             let mode = $("#setTextModal [name='mode']").val();
             if (mode == "json") {
-                block.parseJson(JSON.parse(
+                evaluator.parseJson(JSON.parse(
                     $("#setTextInput").val()
                 ));
             } else {
-                block.parseYaml(
+                evaluator.parseYaml(
                     $("#setTextInput").val()
                 );
             }
@@ -249,12 +249,12 @@
             $("#resultSpan").html(evaluate());
         });
         $("#btnClear").on("click", () => {
-            block.parseJson({});
+            evaluator.parseJson({});
         });
 
         const evaluate = () => {
             let data = JSON.parse(context.compareDataEditor.getValue());
-            let result = QzEvaluator.fromJSON(block.getValue()).evaluate(data);
+            let result = QzEvaluator.fromJSON(evaluator.getValue()).evaluate(data);
             return result;
         };
     </script>

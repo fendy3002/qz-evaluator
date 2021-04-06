@@ -12,24 +12,29 @@
 Usage in browser:
 
 ```javascript
-const block = QzEvaluatorDom.blockly(document.getElementById('evaluator'), {
-    autosave: true,
-    readonly: false,
-});
-let logicBlock = block.getValue();
+const evaluator = QzEvaluatorDom.render(
+    document.getElementById('evaluator'), 
+    {
+        autosave: true,
+        readonly: false,
+    }
+);
+let logicBlock = evaluator.getValue();
 ```
 
 ## API
 
-### blockly
+### render
+
+Initiate evaluator dom
 
 ```javascript
-_.blockly(domElement, option);
+_.render(domElement, option);
 ```
 
 Arguments:
 
-| argument        | type                                  | function                               |
+| argument        | type                                  | description                            |
 | --------------- | ------------------------------------- | -------------------------------------- |
 | domElement      | DOM Element                           | DOM element to render evaluator dom    |
 | option.autosave | boolean                               | if true, evaluator will save changes to localstorage |
@@ -43,10 +48,96 @@ Returns:
 QzEvaluator block object
 ```
 
-### blockObject.parseYaml
-### blockObject.parseJson
+Example:
+
+```javascript
+const evaluator = QzEvaluatorDom.render(
+    document.getElementById('evaluator'), 
+    {
+        autosave: true,
+        readonly: false,
+    }
+);
+```
+
 ### blockObject.getValue
+
+Get logic blocks as JSON
+
+```javascript
+evaluator.getValue();
+```
+
+Returns:
+
+```
+Logic block in JSON format
+```
+
+Example:
+```javascript
+let logicBlock = evaluator.getValue();
+/*
+{ $prop_number: "myValue" }
+*/
+```
+
 ### blockObject.getYaml
+
+Get logic blocks as YAML
+```javascript
+evaluator.getYaml();
+```
+
+Returns:
+
+```
+Logic block in YAML format
+```
+
+Example:
+```javascript
+let logicBlock = evaluator.getYaml();
+/*
+$prop_number: "myValue"
+*/
+```
+
+### blockObject.parseJson
+
+Parse logic block in JSON format
+```javascript
+evaluator.parseJson(json);
+```
+
+Arguments:
+
+| argument        | type  | description                            |
+| --------------- | ----- | -------------------------------------- |
+| json            | JSON  | logic block                            |
+
+Example:
+```javascript
+evaluator.parseJson({ $prop_number: "myValue" });
+```
+
+### blockObject.parseYaml
+
+Parse logic block in YAML format
+```javascript
+evaluator.parseYaml(yaml);
+```
+
+Arguments:
+
+| argument        | type    | description                            |
+| --------------- | ------- | -------------------------------------- |
+| yaml            | string  | logic block                            |
+
+Example:
+```javascript
+evaluator.parseYaml(`$prop_number: "myValue"`);
+```
 
 # Evaluator
 

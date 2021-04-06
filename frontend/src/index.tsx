@@ -18,7 +18,7 @@ export interface Option {
     evalMode?: EvalMode
 };
 
-const blockly = (elem, option?: any) => {
+const render = (elem, option?: any) => {
     let useOption = lo.merge({
         autosave: false,
         readonly: false,
@@ -228,5 +228,5 @@ const blockly = (elem, option?: any) => {
     };
 };
 export {
-    blockly
+    render
 };
