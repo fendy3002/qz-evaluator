@@ -8,6 +8,9 @@
     "compile": "tsc && webpack --mode=development",
     "prepublish": "yarn compile"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.12",
