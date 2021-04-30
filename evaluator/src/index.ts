@@ -31,4 +31,3 @@ const service: types.Service = {
     fromJSON,
     fromYAML,
 };
-export { types };
