@@ -1,6 +1,6 @@
 {
   "name": "@fendy3002/qz-evaluator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
@@ -8,6 +8,10 @@
     "compile": "tsc && webpack --mode=development",
     "prepublish": "yarn compile"
   },
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ],
   "publishConfig": {
     "access": "public"
   },
