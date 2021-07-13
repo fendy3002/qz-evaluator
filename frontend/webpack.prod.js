@@ -9,6 +9,7 @@ let entryOutput = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "[name].js",
+        libraryTarget: "commonjs2"
     }
 };
 module.exports = merge(common, {
