@@ -8,6 +8,13 @@
     "compile": "webpack --config webpack.prod.js",
     "prepublish": "yarn compile"
   },
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.12",
