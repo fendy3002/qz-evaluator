@@ -8,7 +8,7 @@ let entryOutput = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: "[name].min.js",
+        filename: "[name].js",
     }
 };
 module.exports = merge(common, {
