@@ -157,6 +157,7 @@ const render = (elem, option?: any) => {
         //media: 'media/',    // to avoid reaching to the web for icons
         sounds: false,
         readOnly: useOption.readonly,
+        scrollbars: true,
         collapse: true, comments: true, disable: false,
         trashcan: true // those ones are automatically true when there are categories
     });
