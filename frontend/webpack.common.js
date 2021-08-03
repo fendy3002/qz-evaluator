@@ -1,16 +1,4 @@
-const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
-
-const sourceCodes = [{
-    entry: {
-        "qz_evaluator_dom": path.resolve(__dirname, "src/index.tsx"),
-    },
-    output: {
-        path: path.resolve(__dirname, 'public/js/bin'),
-        library: 'QzEvaluatorDom',
-        filename: "[name].js",
-    }
-}];
 
 let webpackModule = {
     module: {
@@ -62,10 +50,3 @@ let webpackModule = {
 }
 
 module.exports = webpackModule;
-
-// module.exports = sourceCodes.map(sc => {
-//     return {
-//         ...sc,
-//         ...webpackModule
-//     }
-// });
